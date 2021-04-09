@@ -4,7 +4,6 @@ import { Post } from '../entities/Post';
 import { postsReducer } from './reducers/PostReducer';
 
 export class PostState {
-    isHappy: boolean;
     posts: Post[];
 }
 // export class EventState {
