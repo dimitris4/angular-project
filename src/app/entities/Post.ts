@@ -1,29 +1,30 @@
-import { Collection } from "./Collection";
-import { User } from "./User";
-
 export class Post {
-    id;
-    createdDate: Date;
-    title: string;
-    text: string;
-    media?: string;
-    collections: Collection[];
-    comments: Comment[];
-    // constructor() {
-    //     this.title = '';
-    //     this.text = '';
-    // }
+  id: string;
+  createdDate: Date;
+  title: string;
+  text: string;
+  media?: string;
+  collections?: Array<string>;
+  comments?: Array<Comment>;
+  status: string;
+
+  constructor() {
+    this.title = '';
+    this.text = '';
+    this.collections = [];
+  }
 }
 
 export class Comment {
-    id;
-    author: UserVm;
-    createdDate: Date;
-    text: string;
+  id: string;
+  author: UserVm;
+  createdDate: Date;
+  text: string;
 }
 
 export class UserVm {
-    firstName: string;
-    lastName: string;
-    profileImage?: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  profileImage?: string;
 }

@@ -1,22 +1,29 @@
 <mat-selection-list [multiple]="false">
-    <mat-list-option routerLink="posts" routerLinkActive="active" class="e2e-posts">
-        <div>
-            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            Posts
-        </div>
-    </mat-list-option>
+  <mat-list-option routerLink="posts" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">arrow_back</span>
+      Organisation name
+    </div>
+  </mat-list-option>
 
-    <mat-list-option routerLink="events" routerLinkActive="active">
-        <div>
-            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            Events
-        </div>
-    </mat-list-option>
+  <mat-list-option routerLink="posts" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">post_add</span>
+      Posts
+    </div>
+  </mat-list-option>
 
-    <mat-list-option routerLink="chats" routerLinkActive="active">
-        <div>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            Chats
-        </div>
-    </mat-list-option>
+  <mat-list-option routerLink="events" routerLinkActive="active">
+    <div class="sidenav-item">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        Events
+    </div>
+  </mat-list-option>
+
+  <mat-list-option routerLink="chats" routerLinkActive="active">
+    <div class="sidenav-item">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        Chats
+    </div>
+  </mat-list-option>
 </mat-selection-list>

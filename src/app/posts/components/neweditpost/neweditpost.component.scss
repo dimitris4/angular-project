@@ -1,0 +1,181 @@
+.container-main{
+  width: 93%;
+  display:grid;
+  grid-template-columns: 65% 35%;
+  grid-template-rows: 100px 2fr 1fr;
+  grid-column-gap: 15px;
+  margin: auto auto 5em;
+}
+
+.back-button{
+  grid-area: 1 / 1 / 2 / 2;
+  align-self: center;
+  justify-self: auto;
+  color: darkblue;
+  text-decoration: none;
+  font-max-size: xx-small;
+}
+
+.form {
+  background-color: white;
+  padding: 20px;
+  //margin-top: 40px;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+  grid-area: 2 / 1 / 4 / 2;
+}
+
+.invites{
+  grid-area: 3 / 2 / 4 / 3;
+  width: 90%;
+  padding:10px;
+  margin: auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+#input_text {
+  height: 150px;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-button {
+  background-color: mediumpurple;
+  color: white;
+  width: 160px;
+  height: 50px;
+  margin-right: 25px;
+}
+
+.collections-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #F0F0F0;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-top: 10px;
+}
+
+.submit-button{
+  width: 45%;
+  height: 50px;
+}
+
+.white-button{
+  background-color: white;
+  color:black;
+  border: solid 1px #303030;
+}
+
+.green-button{
+  background-color: mediumseagreen;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-icon{
+  font-size: 15px;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: mediumpurple; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: lightgray;  /*replace with your color*/
+}
+
+p {
+  color: dimgrey;
+  font-size: 14px;
+  margin-top: 5px;
+  line-height: 1.5em;
+}
+
+h4{
+  margin-bottom: 0px;
+  color: rebeccapurple;
+}
+
+h3{
+  color: rebeccapurple;
+  margin-top: 5px;
+}
+
+.subtitle-collaboration{
+  font-size: 12px;
+  color: darkgray;
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: mediumpurple;
+  }
+  mat-form-field {
+    .mat-hint, input, ::placeholder, .mat-form-field-label {
+      color: mediumpurple;
+    }
+  }
+}
+
+.invites h4{
+  margin-top:0px;
+}
+
+.select-container{
+  width: 400px;
+}
+
+.collaboration-invite-container{
+  display: flex;
+  justify-content: space-between;
+  border-radius:10px;
+  background-color: #F0F0F0;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.icon-left{
+  width: 15%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+}
+
+.cover{
+  width: 40px;
+  height: 30px;
+  background-color: mediumseagreen;
+  right:10px;
+}
+
+span {
+  font-size: 14px;
+}
+
+.text-and-right-icon{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

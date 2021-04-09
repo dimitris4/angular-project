@@ -4,22 +4,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule} from '@angular/material/icon';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule} from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
-import { PostsComponent } from './posts/posts.component';
+import { PostsComponent } from './posts/components/post-list/posts.component';
 import { EventsComponent } from './events/events.component';
 import { ChatsComponent } from './chats/chats.component';
-import { NeweditpostComponent } from './neweditpost/neweditpost.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import { PostComponent } from './post/post.component';
+import { NeweditpostComponent } from './posts/components/neweditpost/neweditpost.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { AppState } from './store/Store';
+import {HttpClientModule} from '@angular/common/http';
 
 import { rootReducer } from './store/store';
 
@@ -32,7 +35,6 @@ import { rootReducer } from './store/store';
     EventsComponent,
     ChatsComponent,
     NeweditpostComponent,
-    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,7 @@ import { rootReducer } from './store/store';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatCardModule
+    MatInputModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -50,10 +52,10 @@ export class AppModule {
   constructor(private ngRedux: NgRedux<AppState>,
     // private devTool: DevToolsExtension,
     private ngReduxRouter: NgReduxRouter,) {
-   
+
     this.ngRedux.configureStore(rootReducer, {});
- 
-      ngReduxRouter.initialize(/* args */);   
+
+      ngReduxRouter.initialize(/* args */);
   }
- 
+
  }

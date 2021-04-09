@@ -1,0 +1,224 @@
+<div class="container-main">
+
+  <div class="back-button">
+    <a class="back-button"  [routerLink]="'/posts'">< Back</a>
+  </div>
+
+  <div class="form">
+
+    <form [formGroup]="postForm" id="form" >
+<!--      (ngSubmit)="onSubmit()"-->
+
+      <div class="flexHeader">
+        <h3>{{ title }}</h3>
+      </div>
+
+      <br>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input id="input_title" matInput formControlName="title">
+          <input formControlName="id" hidden>
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Text</mat-label>
+          <textarea id="input_text" matInput formControlName="text" ></textarea>
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <!--add media-->
+      <div>
+        <h4>Add media</h4>
+        <p>You can add one media type to your post. If you want to change the media type,
+          you need to deleted the added item first.</p>
+        <div style="display: flex; flex-wrap: wrap;">
+          <button class="media-button" mat-raised-button>
+            <span class="button-icon material-icons">insert_photo</span>
+            Photo(s)
+          </button>
+          <button class="media-button" mat-raised-button>
+            <span class="material-icons">smart_display</span>
+            Video
+          </button>
+          <button class="media-button" mat-raised-button>
+            <span class="material-icons">podcasts</span>
+            Podcast
+          </button>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- add to collection -->
+      <!-- add to collection -->
+      <div>
+        <h4>Collection</h4>
+        <p>You can add this post to one or more collections of related content.</p>
+        <div class="select-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Select collections</mat-label>
+            <mat-select formControlName="collections" multiple>
+              <mat-select-trigger>
+                {{selectedPost.collections.value ? selectedPost.collections.value[0] : ''}}
+                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">
+            (+{{selectedPost.collections.value.length - 1}} {{selectedPost.collections.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let collection of availableCollections" [value]="collection">{{collection.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <!-- display list of selected collections with delete button -->
+          <ul>
+            <li *ngFor="let collection of postForm.controls['collections'].value">
+              <div class="collections-list">
+                <span>{{collection.title}}</span>
+                <a style="cursor: pointer" (click)="removeCollectionOnClick(collection.id)">
+                  <span class="material-icons">delete_forever</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- Pinned post functionality-->
+      <div>
+        <h4>Pinned</h4>
+        <p>You can pin one post or event to the top of the page.</p>
+        <mat-slide-toggle></mat-slide-toggle>
+      </div>
+
+      <br>
+
+      <!-- add responsible -->
+      <div>
+        <h4>Responsible</h4>
+        <p>Assign responsibility to a volunteer to give them access to edit this content and give them notificationss
+          when there are new comments.</p>
+        <div class="select-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Select volunteer or group</mat-label>
+            <mat-select formControlName="collections" multiple>
+              <mat-select-trigger>
+                {{selectedPost.collections.value ? selectedPost.collections.value[0] : ''}}
+                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">
+                  (+{{selectedPost.collections.value.length - 1}} {{selectedPost.collections.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let collection of availableCollections" [value]="collection">{{collection.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <!-- display list of selected collections with delete button -->
+          <ul>
+            <li *ngFor="let collection of postForm.controls['collections'].value">
+              <div class="collections-list">
+                <span>{{collection.title}}</span>
+                <a style="cursor: pointer" (click)="removeCollectionOnClick(collection.id)">
+                  <span class="material-icons">delete_forever</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- collaboration -->
+      <div>
+        <h4>Collaboration</h4>
+        <p>Invite another student organisation to collaborate on content creation.<br> A co-creator will be
+          listed as co-author of the content and the content will show up on their page and feed but they can't
+          edit the content.</p>
+        <div class="select-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Select collections</mat-label>
+            <mat-select formControlName="collections" multiple>
+<!--              <mat-select-trigger>-->
+<!--                {{selectedPost.collections.length>0 ? selectedPost.collections.value[0] : ''}}-->
+<!--                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">-->
+<!--            (+{{selectedPost.collections.value.length - 1}} {{selectedPost.collections.value?.length === 2 ? 'other' : 'others'}})-->
+<!--              </span>-->
+<!--              </mat-select-trigger>-->
+              <mat-option *ngFor="let collection of availableCollections" [value]="collection">{{collection.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- display list of selected collections with delete button -->
+          <ul>
+            <li *ngFor="let collection of postForm.controls['collections'].value">
+              <div class="collections-list">
+                <span>{{collection.title}}<br><span class="subtitle-collaboration">{{collection.title}}</span></span>
+                <a style="cursor: pointer" (click)="removeCollectionOnClick(collection.id)">
+                  <span class="material-icons">delete_forever</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="selectedPost.status !== 'PUBLISHED'">
+        <br>
+        <hr>
+        <br>
+      </div>
+
+
+      <!-- submit buttons-->
+
+      <!-- if post status is DRAFT, then display the buttons -->
+      <div *ngIf="selectedPost.status !== 'PUBLISHED'" class="button-container">
+        <button class="submit-button white-button" (click)="changeStatusDraft()"  mat-raised-button color="primary">
+          <div class="button-container">
+            <span>Save draft</span>
+            <span class="material-icons small-icon">save</span>
+          </div>
+        </button>
+
+        <button class="submit-button green-button" (click)="changeStatusPublished()" mat-raised-button color="primary" id="submit_button">
+          <div class="button-container">
+            <span>Publish post</span>
+            <span class="material-icons small-icon">library_books</span>
+          </div>
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div *ngIf="postForm.controls['collections'].value.length > 0" class="invites">
+    <h4>Collaboration Invite states</h4>
+    <!-- display list of selected collections with delete button -->
+    <ul>
+      <li *ngFor="let collection of postForm.controls['collections'].value">
+        <div class="collaboration-invite-container">
+          <div style="background-color: mediumseagreen;border-bottom-left-radius:10px;border-top-left-radius: 10px;
+          height:50px;width: 15%;text-align: center; position:relative;">
+            <span class="material-icons" style="color:white;position:absolute;top: 50%;left:50%;margin-right: -50%;
+                    transform: translate(-50%, -50%)">done</span>
+          </div>
+
+          <span style="width: 75%;margin-left: 5px;padding:5px;">{{collection.title}}<br><span class="subtitle-collaboration">{{collection.title}}</span></span>
+          <a style="cursor: pointer; width: 10%;" (click)="removeCollectionOnClick(collection.id)">
+            <span class="material-icons">delete_forever</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
