@@ -19,7 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { AppState } from './store/Store';
 import {HttpClientModule} from '@angular/common/http';
@@ -50,12 +50,9 @@ import { rootReducer } from './store/store';
 })
 export class AppModule {
   constructor(private ngRedux: NgRedux<AppState>,
-    // private devTool: DevToolsExtension,
-    private ngReduxRouter: NgReduxRouter,) {
-
-    this.ngRedux.configureStore(rootReducer, {});
-
-      ngReduxRouter.initialize(/* args */);
+              private devTool: DevToolsExtension,
+              private ngReduxRouter: NgReduxRouter, ) {
+    this.ngRedux.configureStore(rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+    ngReduxRouter.initialize(/* args */);
   }
-
  }

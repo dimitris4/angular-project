@@ -32,7 +32,9 @@ export function postsReducer(state: PostState = INITIAL_STATE, action: any): Pos
         return tassign(state, {posts: state.posts.concat(action.payload)});
         // return tassign(state, {posts: [...state.posts, action.payload]});
 
+
     default:
+
     return state;
  }
 }
