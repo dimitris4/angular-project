@@ -22,21 +22,14 @@ const INITIAL_STATE: PostState = { posts };
 export function postsReducer(state: PostState = INITIAL_STATE, action: any): PostState {
   switch (action.type) {
     case PostActions.UPDATE_POST:
-        // [{id:'1',...},{2},{3},{4},{5}]
-        // [{1},{2},{3new},{4},{5}]
-        // state.posts[2] = action.payload; // mutate the original array.
-        const newArray = [...state.posts]; // copy of the array.
-        const index = state.posts.findIndex(post => post.id === action.payload.id);
-        newArray[index] = action.payload;
-        return tassign(state, {posts: newArray});
-
+      const newArray = [...state.posts]; // copy of the array.
+      const index = state.posts.findIndex(post => post.id === action.payload.id);
+      newArray[index] = action.payload;
+      return tassign(state, {posts: newArray});
     case PostActions.ADD_POST:
-        // add the action.payload (post) to the array of posts, but without mutating the array.
-        return tassign(state, {posts: state.posts.concat(action.payload)});
-        // return tassign(state, {posts: [...state.posts, action.payload]});
-
+      // return tassign(state, {posts: state.posts.concat(action.payload)});
+      return tassign(state, {posts: [...state.posts, action.payload]});
     default:
-
-    return state;
+      return state;
  }
 }

@@ -2,9 +2,11 @@
   width: 93%;
   display:grid;
   grid-template-columns: 65% 35%;
+  flex-wrap: wrap;
   grid-template-rows: 100px 2fr 1fr;
   grid-column-gap: 15px;
-  margin: auto auto 5em;
+  grid-row-gap: 2em;
+  margin: auto auto 1em 2em;
 }
 
 .back-button{
@@ -72,7 +74,6 @@ li {
 }
 
 .submit-button{
-  width: 45%;
   height: 50px;
 }
 
@@ -87,7 +88,10 @@ li {
 }
 
 .button-container{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap:1em;
+  column-gap:2em;
   justify-content: space-between;
   align-items: center;
 }
@@ -119,6 +123,7 @@ h4{
 h3{
   color: rebeccapurple;
   margin-top: 5px;
+  font-size: x-large;
 }
 
 .subtitle-collaboration{
@@ -143,6 +148,7 @@ h3{
 
 .select-container{
   width: 400px;
+  font-size: 13px;
 }
 
 .collaboration-invite-container{
@@ -179,3 +185,67 @@ span {
   justify-content: space-around;
   align-items: center;
 }
+
+.inside-button-container{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-section-container {
+  background-color: white;
+  width: 61%;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+  margin-left: 2em;
+  margin-bottom: 5em;
+  padding-bottom: 1em;
+}
+
+.comment-section-container > .flexHeader{
+  margin-left: 1em;
+  padding-top: 2em;
+  color:red;
+}
+
+.comment-item{
+  width: 97%;
+  height: auto;
+  display:flex;
+  justify-content:space-between;
+  box-shadow: 0 3px 3px -2px gray;
+  margin: auto auto 1.5em;
+}
+
+.profile-picture{
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.profile-picture > img{
+  border-radius:50%;
+  max-height:100%;
+  max-width: 100%;
+}
+
+.comment-body{
+  width: 90%;
+  padding-bottom: 0.5em;
+}
+
+.comment-body > h4{
+  margin: 0;
+  color:#303030;
+}
+
+.comment-body > p{
+  margin-bottom: 5px;
+}
+
+
+
+
+
+
+

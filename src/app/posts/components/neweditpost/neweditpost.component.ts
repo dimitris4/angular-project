@@ -51,7 +51,7 @@ export class NeweditpostComponent implements OnInit {
         }
       });
     this.postForm = this.fb.group({
-      title: [this.selectedPost.title, Validators.required],
+      title: [this.selectedPost.title],
       createdDate: [this.selectedPost.createdDate],
       text: [this.selectedPost.text],
       id: [this.selectedPost.id],
