@@ -81,4 +81,19 @@ describe('posts reducer', () => {
     expect(post.text).toEqual('Something1');
     // expect(result.posts.find( i => i.id === updatedPost.id)).toEqual(updatedPost);
   });
+
+  it('delete a post from the posts array', () => {
+    const oldState = { posts };
+    const updatedPost: any = {
+      id: '1'
+    };
+
+    deepFreeze(oldState);
+
+    const actionObj = { type: types.PostActions.DELETE_POST, payload: updatedPost };
+
+    // Act
+    const result = postsReducer(oldState, actionObj);
+    expect(result.posts.length).toEqual(oldState.posts.length - 1);
+  });
 });

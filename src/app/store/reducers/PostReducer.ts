@@ -29,6 +29,8 @@ export function postsReducer(state: PostState = INITIAL_STATE, action: any): Pos
     case PostActions.ADD_POST:
       // return tassign(state, {posts: state.posts.concat(action.payload)});
       return tassign(state, {posts: [...state.posts, action.payload]});
+    case PostActions.DELETE_POST:
+      return { posts: state.posts.filter(post => post.id !== action.payload.id) };
     default:
       return state;
  }

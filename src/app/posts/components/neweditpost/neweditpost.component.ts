@@ -92,4 +92,9 @@ export class NeweditpostComponent implements OnInit {
     this.published = true;
     this.onSubmit();
   }
+
+  deletePostOnClick(): void {
+    this.postActions.deletePost(this.selectedPost);
+    this.router.navigate(['posts']);
+  }
 }

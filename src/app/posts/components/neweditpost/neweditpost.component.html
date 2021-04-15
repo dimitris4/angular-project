@@ -194,7 +194,7 @@
         </button>
 
 <!--        delete (show only in edit mode) -->
-        <button *ngIf="editMode" class="submit-button white-button" (click)="changeStatusPublished()" mat-raised-button color="primary" id="submit_button">
+        <button *ngIf="editMode" class="submit-button white-button" (click)="deletePostOnClick()" mat-raised-button color="primary" id="delete_button">
           <div class="inside-button-container">
             <span>Delete post</span>
           </div>

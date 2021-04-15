@@ -10,6 +10,7 @@ export class PostActions {
 
   static ADD_POST = 'ADD_POST';
   static UPDATE_POST = 'UPDATE_POST';
+  static DELETE_POST = 'DELETE_POST';
 
   addPost(newPost: Post): void {
     this.ngRedux.dispatch({
@@ -22,6 +23,14 @@ export class PostActions {
     this.ngRedux.dispatch({
         type: PostActions.UPDATE_POST,
         payload: updatedPost
+    });
+  }
+
+  deletePost(updatedPost: Post): void {
+    console.log('inside the action', updatedPost);
+    this.ngRedux.dispatch({
+      type: PostActions.DELETE_POST,
+      payload: updatedPost
     });
   }
 }
