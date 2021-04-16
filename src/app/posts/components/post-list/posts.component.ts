@@ -13,7 +13,7 @@ import { AppState } from '../../../store/Store';
 })
 export class PostsComponent implements OnInit {
   public posts: Post[];
-  public displayedColumns: string[] = ['title', 'createdDate', 'media', 'status', 'edit'];
+  public displayedColumns: string[] = ['title', 'createdDate', 'type', 'activity', 'status', 'edit'];
 
   constructor(
     private router: Router,

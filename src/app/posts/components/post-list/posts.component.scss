@@ -43,7 +43,7 @@ mat-chip {
 }
 
 .main-container{
-  width: 90%;
+  width: 95%;
   margin-left: 2em;
   margin-top: 3em;
   background-color: white;
@@ -92,4 +92,13 @@ mat-chip {
   color: #101010;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.5px;
+}
+
+.thumbnail-icon{
+  color: darkslateblue;
+  font-size: small;
+}
+
+.table-column{
+  padding-right: 1em;
 }
