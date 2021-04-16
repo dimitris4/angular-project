@@ -27,6 +27,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { rootReducer } from './store/store';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { LoginComponent } from './login/login.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { RegisterComponent } from './register/register.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -38,6 +42,8 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     ChatsComponent,
     NeweditpostComponent,
     AlertBoxComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     ReactiveFormsModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
     MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
+    MatInputModule, MatCardModule, MatGridListModule, MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

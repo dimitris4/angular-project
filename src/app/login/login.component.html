@@ -1,0 +1,52 @@
+<mat-grid-list cols="4" rowHeight="500px">
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title id="loginTitle">Login</mat-card-title>
+            <mat-card-subtitle>to do something...</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Username" formControlName="username">
+              
+              <mat-error *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
+                You must fill out the username
+              </mat-error>
+              <mat-error *ngIf="loginForm.controls.username.errors?.minlength && loginForm.controls.username.touched">
+                Username must be at least 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+        
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Password" type="password" formControlName="password">
+              <mat-error *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+                You must fill out the password
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" id="btnUserlogin">Login</button>
+                
+            </mat-card-content>
+            <mat-card-actions>
+              <mat-divider></mat-divider>
+              
+              <mat-card-subtitle>I want to signup instead</mat-card-subtitle>
+              <button type="button" mat-button routerLink="/signup" >Signup</button>
+            </mat-card-actions>
+          </mat-card>
+    
+      </form>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+</mat-grid-list>
+
+<router-outlet></router-outlet>
