@@ -4,7 +4,7 @@ export class User {
     lastName: string;
     role: string; // admin, student, moderator
     username: string;
-    password: string;
+    // password: string;
     email: string;
     profileImage?: string;
     coverPhoto?: string;

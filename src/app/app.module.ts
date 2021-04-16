@@ -51,6 +51,7 @@ import {MatCardModule} from '@angular/material/card';
     NgReduxRouterModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
     MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
     MatInputModule, MatCardModule, MatGridListModule, MatListModule

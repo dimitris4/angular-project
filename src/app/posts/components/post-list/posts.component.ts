@@ -5,8 +5,8 @@ import { PostsService } from '../../service/post.service';
 import { Post } from '../../../entities/Post';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
-import {MatDialog} from '@angular/material/dialog';
-import {AlertBoxComponent} from "../../../alert-box/alert-box.component";
+import { MatDialog } from '@angular/material/dialog';
+import { AlertBoxComponent } from "../../../alert-box/alert-box.component";
 
 @Component({
   selector: 'app-posts',
