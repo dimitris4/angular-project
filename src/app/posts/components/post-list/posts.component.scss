@@ -43,7 +43,7 @@ mat-chip {
 }
 
 .main-container{
-  width: 95%;
+  width: 90%;
   margin-left: 2em;
   margin-top: 3em;
   background-color: white;
@@ -72,15 +72,24 @@ mat-chip {
   padding: 0.7em;
   background-color: #FF8C00;
   border-radius:20px;
-  font-family: Helvetica, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .text{
   letter-spacing: 0.1em;
   color: #202020;
   font-weight: bold;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
 }
 
 .text-draft {
   background-color: lightgreen;
+}
+
+.mat-header-cell {
+  font-size: 16px;
+  color: #101010;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px;
 }
