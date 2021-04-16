@@ -23,8 +23,10 @@ import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store'
 import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { AppState } from './store/Store';
 import {HttpClientModule} from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { rootReducer } from './store/store';
+import { AlertBoxComponent } from './alert-box/alert-box.component';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { rootReducer } from './store/store';
     EventsComponent,
     ChatsComponent,
     NeweditpostComponent,
+    AlertBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { rootReducer } from './store/store';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
+    MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
