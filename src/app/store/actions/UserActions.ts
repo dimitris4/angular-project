@@ -3,25 +3,26 @@ import { NgRedux } from '@angular-redux/store';
 import { AppState } from './../Store';
 import { AuthService} from './../../auth.service';
 import { User } from 'src/app/entities/User';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({ providedIn: 'root'})
 export class UserActions {
 
-    constructor (private ngRedux: NgRedux<AppState>, private authService: AuthService)
-    {} 
+  constructor(private ngRedux: NgRedux<AppState>, private authService: AuthService) {}
 
-  static SIGNED_UP: string = 'SIGNED_UP'; 
+  static SIGNED_UP = 'SIGNED_UP';
+  static LOG_IN = 'LOG_IN';
 
   signup(username: string, password: string): void {
-    this.authService.signup(username, password).subscribe((res: any) => {
-        // After you get a reponse from the server
-        console.log("after getting a reponse");
+    this.authService
+      .signup(username, password)
+      .subscribe((res: any) => {
+        console.log('after getting a reponse');
         console.log(res);
-      
-        const user: User = { 
-          id: res.localId, 
-          username, email: username, 
-          signupDate: new Date() 
+        const user: User = {
+          id: res.localId,
+          username, email: username,
+          signupDate: new Date()
         } as User;
 
         this.ngRedux.dispatch({
@@ -29,13 +30,21 @@ export class UserActions {
           payload: {user, token: res.idToken}
       });
     });
+  }
 
-    console.log("before getting a reponse");
-    
-    // Before you get a response from the server.
-
-
-    
+  login(username: string, password: string): void {
+    this.authService
+      .login(username, password)
+      .subscribe(res => {
+      this.ngRedux.dispatch({
+        type: UserActions.LOG_IN,
+        payload: {username, password}
+      });
+      })
+      .catch((err: HttpErrorResponse) => {
+          // simple logging, but you can do a lot more, see below
+          console.error('An error occurred:', err.error);
+    });
   }
 
 }
