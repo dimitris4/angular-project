@@ -3,7 +3,7 @@ import { NgRedux } from '@angular-redux/store';
 import { AppState } from './../Store';
 import { AuthService} from './../../auth.service';
 import { User } from 'src/app/entities/User';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({ providedIn: 'root'})
 export class UserActions {
@@ -12,6 +12,13 @@ export class UserActions {
 
   static SIGNED_UP = 'SIGNED_UP';
   static LOG_IN = 'LOG_IN';
+  static SAVE_SOMETHING = 'SAVE_SOMETHING';
+
+  saveSomething(something: string): void {
+    this.authService.saveSomething(something).subscribe((res: any) => {
+      console.log(res);
+    });
+  }
 
   signup(username: string, password: string): void {
     this.authService

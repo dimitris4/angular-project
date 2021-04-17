@@ -25,6 +25,10 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  saveSomething(): void {
+    this.userActions.saveSomething('interesting');
+  }
+
   onSubmit(): void {
     console.log(this.registerForm);
 
