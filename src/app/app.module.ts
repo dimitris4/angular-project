@@ -31,6 +31,8 @@ import { LoginComponent } from './login/login.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RegisterComponent } from './register/register.component';
 import {MatCardModule} from '@angular/material/card';
+import { AuthGuard } from './auth.guard';
+import { SecureInnerPagesGuard } from './secure-inner-pages.guard';
 
 
 @NgModule({
@@ -56,7 +58,7 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
     MatInputModule, MatCardModule, MatGridListModule, MatListModule
   ],
-  providers: [],
+  providers: [AuthGuard, SecureInnerPagesGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
