@@ -1,23 +1,11 @@
-.example-spacer {
-    flex: 1 1 auto;
-}
-
 .container {
     display: flex;
 }
 
 .sidenav {
     flex: 1;
-    border: 1px solid red;
 }
 
 .content {
     flex: 4;
-    border: 1px solid red;
-}
-
-.sticky-bar {
-  position: sticky;
-  top: 0; /* Sets the sticky toolbar to be on top */
-  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }

@@ -1,25 +1,2 @@
-<mat-toolbar class="sticky-bar" xmlns:background-color="http://www.w3.org/1999/xhtml">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-   <mat-icon>menu</mat-icon>
- </button>
- <span>CBS Students (Kvalifik)</span>
- <span class="example-spacer"></span>
- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-   <mat-icon>favorite</mat-icon>
- </button>
- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-  <mat-icon>share</mat-icon>
-</button>
-</mat-toolbar>
-
-
-<div class="container">
-  <div class="sidenav">
-    <!-- Sidenav -->
-    <app-sidenav></app-sidenav>
-  </div>
-  <div class="content" style="background-color: #F0F0F0;">
-    <!-- Content -->
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<app-topmenubar></app-topmenubar>
+<router-outlet></router-outlet>

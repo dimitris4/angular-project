@@ -1,54 +1,99 @@
-<button type="button" mat-button (click)="saveSomething()">Save Something</button>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <div class="background">
+    <div class="form-wrapper">
+      <h3>Create your free account to grow your network</h3>
+      <!-- username -->
+      <!--      <div style="margin-bottom: .5em;">-->
+      <!--        <mat-form-field appearance="fill">-->
+      <!--          <mat-label>Username</mat-label>-->
+      <!--          <input matInput formControlName = "username" type="text" name="username" placeholder="Username"-->
+      <!--                 [ngClass]="{ 'is-invalid': submitted && registrationForm.controls.username.errors }" required>-->
+      <!--        </mat-form-field>-->
+      <!--        <div *ngIf="submitted && f.username.errors">-->
+      <!--          <div *ngIf="f.username.errors.required" class="form-error-message">Username is required.</div>-->
+      <!--          <div *ngIf="f.username.errors.minlength" class="form-error-message">Username must be at least 6 characters.</div>-->
+      <!--        </div>-->
+      <!--      </div>-->
 
-<mat-grid-list cols="4" rowHeight="500px">
-  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
-  <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title id="loginTitle">Signup</mat-card-title>
-            <mat-card-subtitle>to do something...</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            
-          <div>
-            <mat-form-field>
-              <input matInput placeholder="Username" formControlName="username">
-              
-              <mat-error *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.touched">
-                You must fill out the username
-              </mat-error>
-              <mat-error *ngIf="registerForm.controls.username.errors?.minlength && registerForm.controls.username.touched">
-                Username must be at least 3 characters
-              </mat-error>
-            </mat-form-field>
+      <div style="display: flex; width: 100%; flex-wrap: wrap; justify-content: center">
+        <!-- email -->
+        <div style="margin-bottom: .5em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName = "email" type="email" name="email"
+                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
+          </mat-form-field>
+          <div *ngIf="submitted && f.email.errors">
+            <div *ngIf="f.email.errors.required" class="form-error-message">Email is required.</div>
+            <div *ngIf="f.email.errors.email" class="form-error-message">Email is not valid.</div>
           </div>
-        
-          <div>
-            <mat-form-field>
-              <input matInput placeholder="Password" type="password" formControlName="password">
-              <mat-error *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty">
-                You must fill out the password
-              </mat-error>
-            </mat-form-field>
+          <div *ngIf="serverError !== ''">
+            <div *ngIf="serverError !== ''" class="form-error-message">{{serverError}}</div>
           </div>
+        </div>
 
-          <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid" id="btnUserlogin">Register</button>
-                
-            </mat-card-content>
-            <mat-card-actions>
-              <mat-divider></mat-divider>
-              
-              <mat-card-subtitle>I want to login instead</mat-card-subtitle>
-              <button type="button" mat-button routerLink="/login" >Login</button>
-            </mat-card-actions>
-          </mat-card>
-    
-      </form>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
-</mat-grid-list>
+        <!-- password -->
+        <div style="margin-bottom: .5em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Passsword</mat-label>
+            <input matInput formControlName = "password" type="password" name="password"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+          </mat-form-field>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" class="form-error-message">Password is required.</div>
+            <div *ngIf="f.password.errors.minlength" class="form-error-message">Password must be at least 6 characters.</div>
+          </div>
+        </div>
 
-<router-outlet></router-outlet>
+        <!-- retype password-->
+        <div style="margin-bottom: .5em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Confirm password</mat-label>
+            <input matInput formControlName = "retypePassword" type="password" name="password"
+                   [ngClass]="{ 'is-invalid': submitted && f.retypePassword.errors }" required />
+          </mat-form-field>
+          <div *ngIf="submitted && f.retypePassword.errors" class="invalid-feedback">
+            <div *ngIf="f.retypePassword.errors.required" class="form-error-message">Confirm password is required.</div>
+            <div *ngIf="f.retypePassword.errors.mustMatch" class="form-error-message">Passwords must match.</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: .5em;">
+          <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName = "firstName" type="text" name="name"/>
+          </mat-form-field>
+        </div>
+
+        <div style="margin-bottom: .5em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName = "lastName" type="text" name="name"/>
+          </mat-form-field>
+        </div>
+
+
+
+      </div>
+
+
+      <div style="display: flex; justify-content: center; flex-wrap: wrap">
+        <div style="font-size: small;padding-top: 1em;padding-bottom: 1em;">
+        <mat-checkbox id="amateur" class="amateur" color="primary" formControlName="acceptTerms"
+                      [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }">
+          I agree with the terms and conditions.
+        </mat-checkbox>
+        <div class="form-error-message" *ngIf="submitted && f.acceptTerms.errors">
+          Accept terms and conditions is required.
+        </div>
+      </div>
+        <button mat-flat-button type="submit" color="primary" style="margin-top: 1em; width: 400px;font-size: 17px;padding: 8px;">Get Started</button>
+      </div>
+
+    </div>
+    <div class="login-instead">
+      <h4>Already have an account? <a routerLink="/login">Sign in.</a></h4>
+    </div>
+  </div>
+</form>
+

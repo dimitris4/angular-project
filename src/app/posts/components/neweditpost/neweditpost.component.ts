@@ -18,7 +18,7 @@ export class NeweditpostComponent implements OnInit {
   public postForm: FormGroup;
   public title: string;
   public editMode: boolean;
-  public published: boolean
+  public published: boolean;
   public availableCollections: Collection[] = [{id: '1', title: 'My favorite collection'},
     {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
     {id: '4', title: 'Summer collection'}];
@@ -73,7 +73,7 @@ export class NeweditpostComponent implements OnInit {
       } else {
         this.postActions.updatePost(this.selectedPost);
       }
-      this.router.navigate(['posts']);
+      this.router.navigate(['home/posts']);
     }
   }
 
@@ -95,6 +95,6 @@ export class NeweditpostComponent implements OnInit {
 
   deletePostOnClick(): void {
     this.postActions.deletePost(this.selectedPost);
-    this.router.navigate(['posts']);
+    this.router.navigate(['home/posts']);
   }
 }

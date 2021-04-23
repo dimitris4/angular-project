@@ -6,7 +6,7 @@ import { Post } from '../../../entities/Post';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertBoxComponent } from "../../../alert-box/alert-box.component";
+import { AlertBoxComponent } from '../../../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-posts',
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
   }
 
   editPost(id: any): void {
-    this.router.navigate(['neweditpost', {myId: id}]);
+    this.router.navigate(['home/neweditpost', {myId: id}]);
   }
 
 }

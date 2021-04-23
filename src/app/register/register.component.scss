@@ -1,18 +1,54 @@
-.example-card {
-    max-width: 400px;
-  }
-  
-  mat-card-actions mat-card-subtitle {
-      margin-top: 20px;
-      margin-left: 20px;
-  }
-  
-  ::ng-deep .mat-form-field .mat-form-field-infix {
-    width:  300px !important;
-  }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  
+.background{
+  background-image: url("../../assets/register-background.png");
+  width: 100%;
+  display: grid;
+  grid-template-rows: 6em 1fr 1em 3em 10em;
+  grid-template-columns: 1fr 500px 1fr;
+}
+
+.form-wrapper{
+  grid-area: 2 / 2 / 3 / 3 ;
+  background-color: white;
+  border-radius: 5px;
+  padding-bottom: 2em;
+}
+
+mat-form-field {
+  width: 400px;
+  margin-bottom: -1.25em;
+  font-size: 1em;
+  //background-color: white;
+}
+
+.form-error-message{
+  margin: 2px 0 10px 0;
+  color: orangered;
+  font-size: small;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+h3{
+  font-size: xx-large;
+  color: black;
+  margin: auto;
+  padding: 40px 40px 15px;
+  text-align: center;
+}
+
+.mat-button.mat-primary .mat-button-focus-overlay {
+  background-color: transparent;
+}
+
+.login-instead{
+  grid-area: 4 / 2 / 5 / 3;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+h4{
+  margin:0;
+}

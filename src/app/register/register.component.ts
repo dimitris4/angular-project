@@ -1,42 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserActions } from '../store/actions/UserActions';
+import { FormBuilder, Validators, FormArray, ValidatorFn } from '@angular/forms';
+// import custom validator to validate that password and confirm password fields match
+import { MustMatch } from './_helpers/must-match.validator';
+import {Router} from '@angular/router';
+import {UserActions} from '../store/actions/UserActions';
+import { NgRedux } from '@angular-redux/store';
+import {AppState} from '../store/Store';
+import {ServerError} from '../entities/ServerError';
+import {tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-register', // name of component
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
 
-  // DI - Dependency injection
-  constructor(private fb: FormBuilder, private router: Router,
-              private userActions: UserActions) {
+  submitted = false;
+  serverError = '';
+
+  registrationForm = this.fb.group(
+    {
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
+      retypePassword: ['', [Validators.required]],
+      firstName: [''],
+      lastName: [''],
+      acceptTerms: [false, Validators.requiredTrue]
+    },
+    {
+      validator: MustMatch('password', 'retypePassword')
+    }
+  );
+
+  constructor(private fb: FormBuilder, private router: Router, private userActions: UserActions,
+              private ngRedux: NgRedux<AppState>) { }
+
+  // getter for easy access to form fields
+  get f(): any { return this.registrationForm.controls; }
+
+  onSubmit(): any {
+    this.submitted = true;
+    console.log(this.registrationForm.value);
+    // stop here if form is invalid
+    if (this.registrationForm.invalid) {
+      return;
+    }
+    this.userActions.signup(this.registrationForm.value.email, this.registrationForm.value.password);
+    this.ngRedux
+      .select(state => state.errors)
+      .subscribe(res => {
+        this.serverError = res.error.message;
+        if (this.serverError !== '') {
+          return;
+        } else {
+          this.router.navigate(['home/posts']);
+        }
+      });
   }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group(
-      {
-        username: ['', [Validators.required, Validators.minLength(3)]], // multiple validators
-        password: ['', Validators.required] // Single validator
-      }
-    );
   }
-
-  saveSomething(): void {
-    this.userActions.saveSomething('interesting');
-  }
-
-  onSubmit(): void {
-    console.log(this.registerForm);
-
-    if (this.registerForm.valid) {
-      this.userActions.signup(this.registerForm.value.username, this.registerForm.value.password);
-      // Send the data to the server to verify the user login
-      // navigate after successful login.
-    }
-  }
-
 }

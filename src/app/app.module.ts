@@ -24,7 +24,6 @@ import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { AppState } from './store/Store';
 import {HttpClientModule} from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { rootReducer } from './store/store';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { LoginComponent } from './login/login.component';
@@ -33,6 +32,10 @@ import { RegisterComponent } from './register/register.component';
 import {MatCardModule} from '@angular/material/card';
 import { AuthGuard } from './auth.guard';
 import { SecureInnerPagesGuard } from './secure-inner-pages.guard';
+import {TopmenubarComponent} from './topmenubar/topmenubar.component';
+import {HomepageComponent} from './homepage/homepage.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -45,7 +48,9 @@ import { SecureInnerPagesGuard } from './secure-inner-pages.guard';
     NeweditpostComponent,
     AlertBoxComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TopmenubarComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +61,11 @@ import { SecureInnerPagesGuard } from './secure-inner-pages.guard';
     HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
     MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule
+    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule
   ],
+
   providers: [AuthGuard, SecureInnerPagesGuard],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {
