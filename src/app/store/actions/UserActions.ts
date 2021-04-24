@@ -15,7 +15,6 @@ export class UserActions {
   static SIGNED_UP = 'SIGNED_UP';
   static LOG_IN = 'LOG_IN';
   static SAVE_SOMETHING = 'SAVE_SOMETHING';
-  public loginSuccess: boolean;
   public errorMessage;
 
   constructor(private ngRedux: NgRedux<AppState>,
@@ -52,24 +51,23 @@ export class UserActions {
       });
   }
 
-  login(username: string, password: string): any {
+  login(username: string, password: string): void {
     this.authService
       .login(username, password)
       .pipe(
-        tap(data => console.log('server data111:', data)),
+        tap(data => console.log('server data: ', data)),
         catchError((error: HttpErrorResponse) => {
           const serverError: ServerError = error.error.error;
           this.errorActions.addError(serverError);
-          localStorage.setItem('user', null);
           return throwError(serverError);
         })
       )
       .subscribe(response => {
-        this.loginSuccess = true;
         this.ngRedux.dispatch({
           type: UserActions.LOG_IN,
           payload: response
         });
+        // if the login is successful, then the error is an empty string
         this.errorActions.addError({message: ''});
       });
   }

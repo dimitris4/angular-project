@@ -31,16 +31,12 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  async onSubmit(): Promise<any> {
+  onSubmit(): void {
     // tries to log in
     if (this.loginForm.valid) {
       this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
     }
-    // const a = this.authService.isLoggedIn;
-    // if (a) {
-    //   await this.router.navigate(['home']);
-    // }
-    // subscribes to the server error state to see if there is any error
+    // subscribes to redux store to see if there is any server error
     this.ngRedux
       .select(state => state.errors)
       .subscribe(res => {
