@@ -7,7 +7,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import { ErrorActions } from './ErrorActions';
 import {ServerError} from '../../entities/ServerError';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({ providedIn: 'root'})
 export class UserActions {
@@ -56,19 +56,19 @@ export class UserActions {
     this.authService
       .login(username, password)
       .pipe(
-        tap(data => console.log('server data:', data)),
+        tap(data => console.log('server data111:', data)),
         catchError((error: HttpErrorResponse) => {
           const serverError: ServerError = error.error.error;
           this.errorActions.addError(serverError);
+          localStorage.setItem('user', null);
           return throwError(serverError);
         })
       )
-      .subscribe(res => {
+      .subscribe(response => {
         this.loginSuccess = true;
-        console.log(this.loginSuccess);
         this.ngRedux.dispatch({
           type: UserActions.LOG_IN,
-          payload: {username, password}
+          payload: response
         });
         this.errorActions.addError({message: ''});
       });

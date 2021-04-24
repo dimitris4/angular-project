@@ -2,7 +2,6 @@ import { NgRedux } from '@angular-redux/store';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { AppState } from './store/Store';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -13,9 +12,19 @@ export class AuthService {
   userData: any;
 
   constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>,
-              public router: Router,
-              public ngZone: NgZone) {}
+              public router: Router, public ngZone: NgZone) { }
 
+  // Returns true when user is logged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null);
+  }
+
+  // Sign out
+  signOut(): void {
+    localStorage.removeItem('user');
+    this.router.navigate(['login']);
+  }
 
   saveSomething(something: string): any {
     const token = this.ngRedux.getState().users.token;

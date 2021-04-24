@@ -5,7 +5,12 @@
       </div>
     </div>
     <div class="toolbar-buttons">
-      <button mat-button color="primary" (click)="onClickShowLogin()">Login</button>
-      <button mat-button color="primary" (click)="onClickShowSignup()">Signup</button>
+      <div *ngIf="!isLoggedIn(); else elseBlock">
+        <button mat-button color="primary" (click)="onClickLogin()">Login</button>
+        <button mat-button color="primary" (click)="onClickSignup()">Signup</button>
+      </div>
+      <ng-template #elseBlock>
+        <button mat-button color="primary" (click)="onClickLogout()">Logout</button>
+      </ng-template>
     </div>
 </mat-toolbar>
