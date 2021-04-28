@@ -15,10 +15,8 @@ import {tap} from 'rxjs/operators';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
   submitted = false;
   serverError = '';
-
   registrationForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.email]],
@@ -33,15 +31,19 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-  constructor(private fb: FormBuilder, private router: Router, private userActions: UserActions,
-              private ngRedux: NgRedux<AppState>) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userActions: UserActions,
+    private ngRedux: NgRedux<AppState>) {}
+
+  ngOnInit(): void {}
 
   // getter for easy access to form fields
   get f(): any { return this.registrationForm.controls; }
 
-  onSubmit(): any {
+  onSubmit(): void {
     this.submitted = true;
-    console.log(this.registrationForm.value);
     // stop here if form is invalid
     if (this.registrationForm.invalid) {
       return;
@@ -57,8 +59,5 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['home/posts']);
         }
       });
-  }
-
-  ngOnInit(): void {
   }
 }

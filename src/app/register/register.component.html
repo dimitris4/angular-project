@@ -35,7 +35,7 @@
         <!-- password -->
         <div style="margin-bottom: .5em;">
           <mat-form-field appearance="fill">
-            <mat-label>Passsword</mat-label>
+            <mat-label>Password</mat-label>
             <input matInput formControlName = "password" type="password" name="password"
                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
           </mat-form-field>
@@ -92,7 +92,7 @@
 
     </div>
     <div class="login-instead">
-      <h4>Already have an account? <a routerLink="/login">Sign in.</a></h4>
+      <h4>Already have an account? <a routerLink="/login" style="text-decoration: none">Sign in.</a></h4>
     </div>
   </div>
 </form>

@@ -1,8 +1,8 @@
 .background{
-  background-image: url("../../assets/register-background.png");
+  background-image: url("../../assets/register-background2.png");
   width: 100%;
   display: grid;
-  grid-template-rows: 6em 1fr 1em 3em 10em;
+  grid-template-rows: 6em 1fr 1em 3em 10em 1fr;
   grid-template-columns: 1fr 500px 1fr;
 }
 
@@ -17,7 +17,6 @@ mat-form-field {
   width: 400px;
   margin-bottom: -1.25em;
   font-size: 1em;
-  //background-color: white;
 }
 
 .form-error-message{

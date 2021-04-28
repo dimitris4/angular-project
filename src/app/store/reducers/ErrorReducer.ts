@@ -4,7 +4,7 @@ import { ErrorActions } from '../actions/ErrorActions';
 import { ServerError } from 'src/app/entities/ServerError';
 
 export const error: ServerError = {
-  message: 'Hello'
+  message: ''
 };
 
 const INITIAL_STATE: ErrorState = { error };

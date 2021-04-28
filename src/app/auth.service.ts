@@ -20,7 +20,6 @@ export class AuthService {
     return (user !== null);
   }
 
-  // Sign out
   signOut(): void {
     localStorage.removeItem('user');
     this.router.navigate(['login']);
@@ -54,5 +53,4 @@ export class AuthService {
     return this.http.post(url, {email: username, password, returnSecureToken: true},
       this.getHttpOptions());
   }
-
 }

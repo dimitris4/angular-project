@@ -12,8 +12,12 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  submitted = false;
   serverError: string;
+  loginForm = this.fb.group( {
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -22,19 +26,16 @@ export class LoginComponent implements OnInit {
     private ngRedux: NgRedux<AppState>,
     private authService: AuthService) {}
 
-  ngOnInit(): void{
-    this.loginForm = this.fb.group(
-      {
-        username: ['', [Validators.required, Validators.minLength(3)]],
-        password: ['', Validators.required]
-      }
-    );
-  }
+  ngOnInit(): void {}
+
+  // getter for easy access to form fields
+  get f(): any { return this.loginForm.controls; }
 
   onSubmit(): void {
+    this.submitted = true;
     // tries to log in
     if (this.loginForm.valid) {
-      this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
+      this.userActions.login(this.loginForm.value.email, this.loginForm.value.password);
     }
     // subscribes to redux store to see if there is any server error
     this.ngRedux

@@ -13,14 +13,14 @@ import {AuthGuard} from './auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard] },
-  // { path: 'signup', component: RegisterComponent },
+  { path: 'signup', component: RegisterComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthGuard],
-    // children: [
-    //   { path: 'posts', component: PostsComponent },
-    //   { path: 'events', component: EventsComponent },
-    //   { path: 'chats', component: ChatsComponent },
-    //   { path: 'posts/:id', component: NeweditpostComponent }
-    //   ]
+    children: [
+      { path: 'posts', component: PostsComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'chats', component: ChatsComponent },
+      { path: 'posts/:id', component: NeweditpostComponent }
+      ]
   }
 ];
 
