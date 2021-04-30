@@ -38,6 +38,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import {AngularFireModule} from "@angular/fire";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CollectionsComponent } from './collections/collections.component';
+import {MatRippleModule} from '@angular/material/core';
 
 
 
@@ -53,21 +57,24 @@ import {AngularFireModule} from "@angular/fire";
     LoginComponent,
     RegisterComponent,
     TopmenubarComponent,
-    HomepageComponent
+    HomepageComponent,
+    DashboardComponent,
+    ProfileComponent,
+    CollectionsComponent
   ],
-  imports: [
-    BrowserModule,
-    NgReduxModule,
-    NgReduxRouterModule.forRoot(),
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
-    AngularFireModule.initializeApp(undefined, undefined),
-    AngularFireDatabaseModule,
-  ],
+    imports: [
+        BrowserModule,
+        NgReduxModule,
+        NgReduxRouterModule.forRoot(),
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
+        MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
+        MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
+        AngularFireModule.initializeApp(undefined, undefined),
+        AngularFireDatabaseModule, MatRippleModule,
+    ],
 
   providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
 

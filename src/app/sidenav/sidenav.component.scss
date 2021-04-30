@@ -2,4 +2,22 @@
   display: grid;
   grid-template-columns: 20% 80%;
   align-items: center;
+  color: #32305d;
+  margin-left: 15px !important;
+}
+
+mat-list-option :active{
+  .mat-ripple{
+    background-color: rgba(242,242,248, .1) !important;
+  }
+}
+
+.mat-list-single-selected-option {
+  background-color: rgb(242,242,250) !important;
+  box-shadow:inset -4px 0px 0px 0px #32305d;
+}
+
+.back-button {
+  margin-right: 90px;
+  margin-left: -7px;
 }
