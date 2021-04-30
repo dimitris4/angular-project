@@ -1,14 +1,14 @@
 declare var require: any;
 
 const deepFreeze: any = require('deep-freeze');
-import { postsReducer, posts } from './PostReducer';
+import { postsReducer } from './PostReducer';
 import * as types from '../actions/PostActions';
 import { Post } from '../../entities/Post';
 
 describe('posts reducer', () => {
 
   it('should return the initial state', () => {
-    expect(postsReducer(undefined, {})).toEqual({ posts });
+    expect(postsReducer(undefined, {})).toEqual({ posts: [] });
   });
 
   it('Add a new post to empty posts array', () => {
@@ -38,7 +38,7 @@ describe('posts reducer', () => {
     // Arrange, Act, Assert
 
     // Arrange
-    const oldState = { posts };
+    const oldState = { posts: [] };
     const newPost: Post = {
       id: '123',
       createdDate: new Date(2021, 1, 2),
@@ -59,7 +59,7 @@ describe('posts reducer', () => {
   });
 
   it('update a post in the posts array', () => {
-    const oldState = { posts };
+    const oldState = { posts: [] };
     const updatedPost: Post = {
       id: '1',
       createdDate: new Date(2021, 1, 5),
@@ -83,7 +83,7 @@ describe('posts reducer', () => {
   });
 
   it('delete a post from the posts array', () => {
-    const oldState = { posts };
+    const oldState = { posts: [] };
     const updatedPost: any = {
       id: '1'
     };

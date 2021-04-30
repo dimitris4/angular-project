@@ -22,11 +22,11 @@ export class UserActions {
               private errorActions: ErrorActions) { }
 
 
-  saveSomething(something: string): void {
-    this.authService.saveSomething(something).subscribe((res: any) => {
-      console.log(res);
-    });
-  }
+  // saveSomething(something: string): void {
+  //   this.authService.saveSomething(something).subscribe((res: any) => {
+  //     console.log(res);
+  //   });
+  // }
 
   signup(email: string, password: string): void {
     this.authService

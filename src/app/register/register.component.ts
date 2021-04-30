@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
         if (this.serverError !== '') {
           return;
         } else {
-          this.router.navigate(['home/posts']);
+          this.router.navigate(['login']);
         }
       });
   }
