@@ -1,16 +1,18 @@
-<mat-selection-list [multiple]="false" class="">
-  <mat-list-option routerLink="posts" routerLinkActive="" class="e2e-posts">
+<mat-selection-list [multiple]="false">
+  <mat-list-item class="e2e-posts">
     <div class="sidenav-item">
-      <span class="material-icons">arrow_back</span>
+      <button mat-icon-button class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       Organisation name
     </div>
-  </mat-list-option>
+  </mat-list-item>
 
   <mat-divider></mat-divider>
 
   <mat-list-option routerLink="dashboard" routerLinkActive="active" class="e2e-posts">
     <div class="sidenav-item">
-      <span class="material-icons">dashboard</span>
+      <span class="material-icons">poll</span>
       Dashboard
     </div>
   </mat-list-option>
