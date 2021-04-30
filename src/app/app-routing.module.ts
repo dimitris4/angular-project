@@ -9,6 +9,9 @@ import { RegisterComponent } from './register/register.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {SecureInnerPagesGuard} from './secure-inner-pages.guard';
 import {AuthGuard} from './auth.guard';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ProfileComponent} from './profile/profile.component';
+import {CollectionsComponent} from './collections/collections.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,7 +22,10 @@ const routes: Routes = [
       { path: 'posts', component: PostsComponent },
       { path: 'events', component: EventsComponent },
       { path: 'chats', component: ChatsComponent },
-      { path: 'posts/:id', component: NeweditpostComponent }
+      { path: 'posts/:id', component: NeweditpostComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'collections', component: CollectionsComponent },
       ]
   }
 ];

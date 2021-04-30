@@ -38,6 +38,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import {AngularFireModule} from "@angular/fire";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CollectionsComponent } from './collections/collections.component';
 
 
 
@@ -53,7 +56,10 @@ import {AngularFireModule} from "@angular/fire";
     LoginComponent,
     RegisterComponent,
     TopmenubarComponent,
-    HomepageComponent
+    HomepageComponent,
+    DashboardComponent,
+    ProfileComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,
