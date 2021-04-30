@@ -4,9 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from '../../service/posts.service';
 import { Post } from '../../../entities/Post';
+import { User } from '../../../entities/User';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
 import { Collection } from '../../../entities/Collection';
+import {AuthService} from "../../../auth.service";
 
 @Component({
   selector: 'app-neweditpost',
@@ -22,10 +24,12 @@ export class NeweditpostComponent implements OnInit {
   public availableCollections: Collection[] = [{id: '1', title: 'My favorite collection'},
     {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
     {id: '4', title: 'Summer collection'}];
+  public availableUsers: User[];
 
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
     private postActions: PostActions,
@@ -33,7 +37,8 @@ export class NeweditpostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.selectedPost);
+    // get user data
+    // this.availableUsers = this.authService.getUsers();
     this.route.paramMap
       .subscribe(params => {
         if (params.get('id') === 'create') {
@@ -67,7 +72,7 @@ export class NeweditpostComponent implements OnInit {
     if (this.postForm.valid) {
       // saves the post in the service and navigates to the posts list
       if (!this.editMode) {
-        this.selectedPost.id = String(Math.floor(Math.random() * 100));
+        // this.selectedPost.id = String(Math.floor(Math.random() * 100));
         this.selectedPost.createdDate = new Date();
         this.postActions.addPost(this.selectedPost);
       } else {

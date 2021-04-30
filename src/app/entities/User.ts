@@ -9,7 +9,6 @@ export class User {
     profileImage?: string;
     coverPhoto?: string;
     signupDate?: Date;
-    title?: string;
 }
 
 

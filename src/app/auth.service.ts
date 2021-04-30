@@ -4,6 +4,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AppState } from './store/Store';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
+import {User} from "./entities/User";
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +29,10 @@ export class AuthService extends ApiService {
     this.router.navigate(['login']);
   }
 
-  // saveSomething(something: string): any {
-  //   const token = this.ngRedux.getState().users.token;
-  //   const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/somethings.json?auth=' + token;
-  //   return this.http.post(url, {something}, this.getHttpOptions());
-  //   // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
-  // }
+  saveUserInfo(user: User, idToken): any {
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/users.json?auth=' + idToken;
+    return this.http.post(url, user, this.getHttpOptions());
+  }
 
   signup(email: string, password: string): any {
     const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
@@ -48,4 +47,9 @@ export class AuthService extends ApiService {
     return this.http.post(url, {email: username, password, returnSecureToken: true},
       this.getHttpOptions());
   }
+
+  // getUsers() {
+  //   const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
+  //   const url = https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=[API_KEY]
+  // }
 }

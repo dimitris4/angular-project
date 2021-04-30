@@ -21,13 +21,6 @@ export class UserActions {
               private authService: AuthService,
               private errorActions: ErrorActions) { }
 
-
-  // saveSomething(something: string): void {
-  //   this.authService.saveSomething(something).subscribe((res: any) => {
-  //     console.log(res);
-  //   });
-  // }
-
   signup(email: string, password: string): void {
     this.authService
       .signup(email, password)
@@ -43,6 +36,9 @@ export class UserActions {
           email,
           signupDate: new Date()
         } as User;
+        console.log('res', res);
+        console.log('new user= ', user, res.idToken);
+        this.authService.saveUserInfo(user, res.idToken).subscribe();
         this.ngRedux.dispatch({
           type: UserActions.SIGNED_UP,
           payload: {user, token: res.idToken, authError: this.errorMessage}

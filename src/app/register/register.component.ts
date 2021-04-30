@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
-    this.userActions.signup(this.registrationForm.value.email, this.registrationForm.value.password);
+    this.userActions.signup(this.registrationForm.value);
     this.ngRedux
       .select(state => state.errors)
       .subscribe(res => {
