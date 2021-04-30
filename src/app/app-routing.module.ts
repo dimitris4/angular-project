@@ -1,3 +1,4 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatsComponent } from './chats/chats.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthGuard],
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'posts', component: PostsComponent },
       { path: 'events', component: EventsComponent },
       { path: 'chats', component: ChatsComponent },
