@@ -3,16 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { AppState } from './store/Store';
 import { Router } from '@angular/router';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends ApiService {
 
   userData: any;
 
   constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>,
-              public router: Router, public ngZone: NgZone) { }
+              public router: Router, public ngZone: NgZone) {
+    super();
+  }
 
   // Returns true when user is logged in and email is verified
   get isLoggedIn(): boolean {
@@ -25,20 +28,12 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  saveSomething(something: string): any {
-    const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/somethings.json?auth=' + token;
-    return this.http.post(url, {something}, this.getHttpOptions());
-    // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
-  }
-
-  getHttpOptions(): any {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-  }
+  // saveSomething(something: string): any {
+  //   const token = this.ngRedux.getState().users.token;
+  //   const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/somethings.json?auth=' + token;
+  //   return this.http.post(url, {something}, this.getHttpOptions());
+  //   // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
+  // }
 
   signup(email: string, password: string): any {
     const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';

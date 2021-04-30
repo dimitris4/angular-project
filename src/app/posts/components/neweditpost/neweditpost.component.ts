@@ -2,7 +2,7 @@ import { NgRedux } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PostsService } from '../../service/post.service';
+import { PostsService } from '../../service/posts.service';
 import { Post } from '../../../entities/Post';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';

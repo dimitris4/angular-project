@@ -1,7 +1,7 @@
 import { NgRedux } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PostsService } from '../../service/post.service';
+import { PostsService } from '../../service/posts.service';
 import { Post } from '../../../entities/Post';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
@@ -27,8 +27,9 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // do we need to call the database every time?
+    this.postActions.readPosts();
     this.ngRedux.select(state => state.posts).subscribe(res => {
-      // this.isHappy = res.isHappy;
       this.posts = res.posts;
     });
     if (this.newPostCreated) {
