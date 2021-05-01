@@ -66,6 +66,7 @@ export class UserActions {
           type: UserActions.LOG_IN,
           payload: response
         });
+        localStorage.setItem('token', response.idToken);
         // if the login is successful, then the error is an empty string
         this.errorActions.addError({message: ''});
       });

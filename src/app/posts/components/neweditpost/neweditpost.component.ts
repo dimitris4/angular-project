@@ -8,7 +8,7 @@ import { User } from '../../../entities/User';
 import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
 import { Collection } from '../../../entities/Collection';
-import {AuthService} from "../../../auth.service";
+import {AuthService} from '../../../auth.service';
 
 @Component({
   selector: 'app-neweditpost',
@@ -24,7 +24,7 @@ export class NeweditpostComponent implements OnInit {
   public availableCollections: Collection[] = [{id: '1', title: 'My favorite collection'},
     {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
     {id: '4', title: 'Summer collection'}];
-  public availableUsers: User[];
+  public organisationList: User[];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,8 +37,7 @@ export class NeweditpostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // get user data
-    // this.availableUsers = this.authService.getUsers();
+    this.organisationList = this.authService.getOrganisations();
     this.route.paramMap
       .subscribe(params => {
         if (params.get('id') === 'create') {
@@ -61,7 +60,9 @@ export class NeweditpostComponent implements OnInit {
       text: [this.selectedPost.text],
       id: [this.selectedPost.id],
       media: [this.selectedPost.media],
-      collections: [this.selectedPost.collections]
+      collections: [this.selectedPost.collections],
+      pinned: [this.selectedPost.pinned],
+      collaboration: [this.selectedPost.collaboration],
     });
   }
 
@@ -85,6 +86,12 @@ export class NeweditpostComponent implements OnInit {
   removeCollectionOnClick(id): void {
     this.postForm.patchValue({
       collections: this.postForm.controls.collections.value.filter(a => a.id !== id),
+    });
+  }
+
+  removeOrganisationOnClick(id): void {
+    this.postForm.patchValue({
+      collaboration: this.postForm.controls.collaboration.value.filter(a => a.id !== id),
     });
   }
 

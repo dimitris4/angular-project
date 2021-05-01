@@ -5,13 +5,15 @@ import { AppState } from './store/Store';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 import {User} from "./entities/User";
+import {Post} from "./entities/Post";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends ApiService {
 
-  userData: any;
+  private apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
+  private token = localStorage.getItem('token');
 
   constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>,
               public router: Router, public ngZone: NgZone) {
@@ -35,21 +37,33 @@ export class AuthService extends ApiService {
   }
 
   signup(email: string, password: string): any {
-    const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
-    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + apiKey;
+    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.apiKey;
     return this.http.post(url, {email, password, returnSecureToken: true},
       this.getHttpOptions());
   }
 
   login(username: string, password: string): any {
-    const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
-    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + apiKey;
+    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.apiKey;
     return this.http.post(url, {email: username, password, returnSecureToken: true},
       this.getHttpOptions());
   }
 
-  // getUsers() {
-  //   const apiKey = 'AIzaSyA1uscUFgQBDJd1hLxiqjDacNPmFfhXBzs';
-  //   const url = https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=[API_KEY]
-  // }
+  getOrganisations(): User[] {
+    const result = [];
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/users.json?auth=' + this.token;
+    this.http.get(url, this.getHttpOptions())
+      .subscribe(res => {
+        if (res) {
+          for (const [key, value] of Object.entries(res)) {
+            const item: any = value;
+            item.id = key;
+            if (item.userType === 'organisation') {
+              result.push(item as User);
+            }
+          }
+          console.log(result);
+        }
+      });
+    return result;
+  }
 }

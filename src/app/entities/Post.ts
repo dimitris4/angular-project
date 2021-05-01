@@ -1,3 +1,5 @@
+import {User} from './User';
+
 export class Post {
   id?: string;
   createdDate: Date;
@@ -7,11 +9,14 @@ export class Post {
   collections?: Array<string>;
   comments?: Array<Comment>;
   status: string;
+  collaboration?: User[];
+  pinned?: boolean;
 
   constructor() {
     this.title = '';
     this.text = '';
     this.collections = [];
+    this.pinned = false;
   }
 }
 

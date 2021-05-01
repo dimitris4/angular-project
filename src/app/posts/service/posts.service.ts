@@ -11,21 +11,19 @@ import {Post} from '../../entities/Post';
 })
 export class PostsService extends ApiService {
 
+  private token = localStorage.getItem('token');
+
   constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>) {
     super();
   }
 
   readPosts(): Observable<ArrayBuffer> {
-    const token = this.ngRedux.getState().users.token;
-    console.log(token);
-    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts.json?auth=' + this.token;
     return this.http.get(url, this.getHttpOptions());
   }
 
   savePost(post: Post): Observable<ArrayBuffer> {
-    const token = this.ngRedux.getState().users.token;
-    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts.json?auth=' + this.token;
     return this.http.post(url, post, this.getHttpOptions());
-    // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
   }
 }
