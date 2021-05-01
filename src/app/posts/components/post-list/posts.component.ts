@@ -27,7 +27,6 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // do we need to call the database every time?
     this.postActions.readPosts();
     this.ngRedux.select(state => state.posts).subscribe(res => {
       this.posts = res.posts;

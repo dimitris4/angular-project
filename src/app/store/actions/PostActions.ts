@@ -36,8 +36,6 @@ export class PostActions {
   addPost(newPost: Post): void {
     this.postService.savePost(newPost)
       .subscribe((result: any) => {
-      console.log('result from saving');
-      console.log(result);
       // newPost.id = result.name;
       this.ngRedux.dispatch({
         type: PostActions.ADD_POST,

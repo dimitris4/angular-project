@@ -61,7 +61,6 @@ export class AuthService extends ApiService {
               result.push(item as User);
             }
           }
-          console.log(result);
         }
       });
     return result;

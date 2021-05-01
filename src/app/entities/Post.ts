@@ -1,5 +1,4 @@
 import {Collaboration} from './Collaboration';
-import {User} from './User';
 
 export class Post {
   id?: string;
@@ -22,17 +21,3 @@ export class Post {
     this.collaborations = [];
   }
 }
-//
-// export class Comment {
-//   id: string;
-//   author: UserVm;
-//   createdDate: Date;
-//   text: string;
-// }
-//
-// export class UserVm {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   profileImage?: string;
-// }

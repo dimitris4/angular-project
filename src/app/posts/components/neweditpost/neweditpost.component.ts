@@ -47,7 +47,6 @@ export class NeweditpostComponent implements OnInit {
           this.editMode = false;
         } else {
           const id = params.get('id');
-          console.log(id);
           this.ngRedux.select(state => state.posts).subscribe(res => {
             this.selectedPost = res.posts.find(post => post.id === id);
           });
@@ -108,7 +107,6 @@ export class NeweditpostComponent implements OnInit {
   }
 
   removeOrganisationOnClick(id): void {
-    console.log('inside remove org on click');
     this.postForm.patchValue({
       collaborations: this.postForm.controls.collaborations.value.filter(a => a.id !== id),
     });
