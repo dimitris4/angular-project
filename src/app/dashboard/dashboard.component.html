@@ -1,2 +1,35 @@
-<h1>Collaboration</h1>
-<h3>Invitations (3)</h3>
+<div class="dashboard">
+<h1 class="title">Collaboration</h1>
+<h3>Invitations ({{invitations.length}})</h3>
+
+<div *ngFor="let post of invitations; let i = index">
+  <div class="dashboard-collabs" *ngIf="showMoreInvitations ? true : i<2">
+    <div>
+      <span class="post-title">Post • {{post.title}}</span><br>
+      <span class="post-date">{{post.organization}} • {{post.createdDate}}</span><br>
+      <p class="post-text">{{post.text}}</p>
+    </div>
+    <div>
+      <button class="acceptBtn">Accept</button>
+      <button class="declineBtn">Decline</button>
+    </div>
+  </div>
+</div>
+<button class="showBtn1" (click)="showInvitations()" *ngIf="invitations.length>2">Show all</button>
+
+<h3>Accepted Collaborations ({{collaborations.length}})</h3>
+
+<div *ngFor="let post of collaborations; let i = index">
+  <div class="dashboard-collabs" *ngIf="showMoreCollaborations ? true : i<2">
+    <div>
+      <span class="post-title">Post • {{post.title}}</span><br>
+      <span class="post-date">{{post.organization}} • {{post.createdDate}}</span><br>
+      <p class="post-text" >{{post.text}}</p>
+    </div>
+    <div>
+      <button class="declineBtn">Remove</button>
+    </div>
+  </div>
+</div>
+<button class="showBtn2" (click)="showCollaborations()" *ngIf="collaborations.length>2">Show all</button>
+</div>

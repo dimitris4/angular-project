@@ -1,9 +1,11 @@
+import { User } from 'src/app/entities/User';
 export class Post {
   id: string;
   createdDate: Date;
   title: string;
   text: string;
   media?: string;
+  collaborations?: Array<User>;
   collections?: Array<string>;
   comments?: Array<Comment>;
   status: string;
