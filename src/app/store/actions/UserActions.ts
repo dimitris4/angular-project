@@ -4,7 +4,7 @@ import { AppState } from '../Store';
 import { AuthService} from '../../auth.service';
 import { User } from 'src/app/entities/User';
 import {catchError, tap} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
+import {throwError} from 'rxjs';
 import { ErrorActions } from './ErrorActions';
 import {ServerError} from '../../entities/ServerError';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -14,16 +14,16 @@ export class UserActions {
 
   static SIGNED_UP = 'SIGNED_UP';
   static LOG_IN = 'LOG_IN';
-  static SAVE_SOMETHING = 'SAVE_SOMETHING';
+
   public errorMessage;
 
   constructor(private ngRedux: NgRedux<AppState>,
               private authService: AuthService,
               private errorActions: ErrorActions) { }
 
-  signup(email: string, password: string): void {
+  signup(form: any): void {
     this.authService
-      .signup(email, password)
+      .signup(form.email, form.password)
       .pipe(
         catchError((error) => {
           const serverError: ServerError = error.error.error;
@@ -33,12 +33,15 @@ export class UserActions {
       .subscribe((res: any) => {
         const user: User = {
           id: res.localId,
-          email,
-          signupDate: new Date()
+          email: form.email,
+          firstName: form.firstName,
+          lastName: form.lastName,
+          signupDate: new Date(),
+          userType: form.userType,
         } as User;
-        console.log('res', res);
-        console.log('new user= ', user, res.idToken);
+        // saves user info to the database
         this.authService.saveUserInfo(user, res.idToken).subscribe();
+
         this.ngRedux.dispatch({
           type: UserActions.SIGNED_UP,
           payload: {user, token: res.idToken, authError: this.errorMessage}

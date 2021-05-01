@@ -37,8 +37,8 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
-import {AngularFireModule} from "@angular/fire";
-
+import {AngularFireModule} from '@angular/fire';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -64,7 +64,7 @@ import {AngularFireModule} from "@angular/fire";
     HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
     MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
+    MatInputModule, MatCardModule, MatRadioModule, MatGridListModule, MatListModule, MatCheckboxModule,
     AngularFireModule.initializeApp(undefined, undefined),
     AngularFireDatabaseModule,
   ],
