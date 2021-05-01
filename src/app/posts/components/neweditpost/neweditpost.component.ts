@@ -9,6 +9,7 @@ import { PostActions } from '../../../store/actions/PostActions';
 import { AppState } from '../../../store/Store';
 import { Collection } from '../../../entities/Collection';
 import {AuthService} from '../../../auth.service';
+import {Collaboration} from '../../../entities/Collaboration';
 
 @Component({
   selector: 'app-neweditpost',
@@ -21,10 +22,11 @@ export class NeweditpostComponent implements OnInit {
   public title: string;
   public editMode: boolean;
   public published: boolean;
+  public organisationList: User[];
+  // replace dummy data with API call in the future
   public availableCollections: Collection[] = [{id: '1', title: 'My favorite collection'},
     {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
     {id: '4', title: 'Summer collection'}];
-  public organisationList: User[];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +39,6 @@ export class NeweditpostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.organisationList = this.authService.getOrganisations();
     this.route.paramMap
       .subscribe(params => {
         if (params.get('id') === 'create') {
@@ -62,12 +63,29 @@ export class NeweditpostComponent implements OnInit {
       media: [this.selectedPost.media],
       collections: [this.selectedPost.collections],
       pinned: [this.selectedPost.pinned],
-      collaboration: [this.selectedPost.collaboration],
+      collaborations: [this.selectedPost.collaborations],
     });
+    // calls directly the service
+    this.organisationList = this.authService.getOrganisations();
   }
 
   onSubmit(): void {
     this.selectedPost = this.postForm.value;
+
+    const collaborationArray = [];
+    if (this.postForm.controls.collaborations.value.length > 0) {
+      for (const item of this.postForm.controls.collaborations.value) {
+        const newCollaboration = new Collaboration();
+        newCollaboration.email = item.email;
+        collaborationArray.push(newCollaboration);
+      }
+    }
+    this.selectedPost.collaborations = collaborationArray;
+
+    // maybe in the future replace the email with the organisation name
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    this.selectedPost.author = loggedInUser.email;
+
     this.published ? this.selectedPost.status = 'PUBLISHED' : this.selectedPost.status = 'DRAFT';
     console.log(this.selectedPost);
     if (this.postForm.valid) {
@@ -90,8 +108,9 @@ export class NeweditpostComponent implements OnInit {
   }
 
   removeOrganisationOnClick(id): void {
+    console.log('inside remove org on click');
     this.postForm.patchValue({
-      collaboration: this.postForm.controls.collaboration.value.filter(a => a.id !== id),
+      collaborations: this.postForm.controls.collaborations.value.filter(a => a.id !== id),
     });
   }
 

@@ -144,7 +144,7 @@
         <div class="select-container">
           <mat-form-field appearance="outline">
             <mat-label>Select organisation</mat-label>
-            <mat-select formControlName="collaboration" multiple>
+            <mat-select formControlName="collaborations" multiple>
 <!--              <mat-select-trigger>-->
 <!--                {{selectedPost.collections.length>0 ? selectedPost.collections.value[0] : ''}}-->
 <!--                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">-->
@@ -157,7 +157,7 @@
 
           <!-- display list of selected organisations with delete button -->
           <ul>
-            <li *ngFor="let organisation of postForm.controls['collaboration'].value">
+            <li *ngFor="let organisation of postForm.controls['collaborations'].value">
               <div class="collections-list">
                 <span>{{organisation.firstName}}<br><span class="subtitle-collaboration">{{organisation.lastName}}</span></span>
                 <a style="cursor: pointer" (click)="removeOrganisationOnClick(organisation.id)">
@@ -166,6 +166,7 @@
               </div>
             </li>
           </ul>
+
         </div>
       </div>
 
@@ -203,11 +204,11 @@
     </form>
   </div>
 
-  <div *ngIf="postForm.controls['collaboration'].value && !editMode" class="invites">
+  <div *ngIf="postForm.controls['collaborations'].value && !editMode" class="invites">
     <h4>Collaboration Invite states</h4>
     <!-- display list of selected collections with delete button -->
     <ul>
-      <li *ngFor="let organisation of postForm.controls['collaboration'].value">
+      <li *ngFor="let organisation of postForm.controls['collaborations'].value">
         <div class="collaboration-invite-container">
           <div style="background-color: mediumseagreen;border-bottom-left-radius:10px;border-top-left-radius: 10px;
           height:50px;width: 15%;text-align: center; position:relative;">
@@ -223,7 +224,6 @@
       </li>
     </ul>
   </div>
-
 </div>
 
 <!-- comments section -->
