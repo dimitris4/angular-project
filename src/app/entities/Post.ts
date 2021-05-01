@@ -20,7 +20,6 @@ export class Post {
     this.collections = [];
     this.pinned = false;
     this.collaborations = [];
-    this.author = localStorage.getItem('user');
   }
 }
 //
