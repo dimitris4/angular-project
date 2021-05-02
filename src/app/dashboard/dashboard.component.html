@@ -1,1 +1,39 @@
+<<<<<<< HEAD
 <p>dashboard works!</p>
+=======
+<div class="dashboard">
+<h2 class="title">Collaboration</h2>
+<h4>Invitations ({{invitations.length}})</h4>
+
+<div *ngFor="let post of invitations; let i = index">
+  <div class="dashboard-collabs" *ngIf="showMoreInvitations ? true : i<2">
+    <div class="info-text">
+      <span class="post-title">Post • {{post.title}}</span><br>
+      <p class="post-date">{{post.organization}} • {{post.createdDate}}</p><br>
+      <p class="post-text">{{post.text}}</p>
+    </div>
+    <div>
+      <button class="acceptBtn">Accept</button>
+      <button class="declineBtn">Decline</button>
+    </div>
+  </div>
+</div>
+<button class="showBtn1" (click)="showInvitations()" *ngIf="invitations.length>2">{{showMoreInvitations ? 'Show less' : 'Show all'}} </button>
+
+<h4>Accepted Collaborations ({{collaborations.length}})</h4>
+
+<div *ngFor="let post of collaborations; let i = index">
+  <div class="dashboard-collabs" *ngIf="showMoreCollaborations ? true : i<2">
+    <div class="info-text">
+      <span class="post-title">Post • {{post.title}}</span><br><br>
+      <span class="post-date">{{post.organization}} • {{post.createdDate}}</span><br>
+      <p class="post-text" >{{post.text}}</p>
+    </div>
+    <div>
+      <button class="declineBtn">Remove</button>
+    </div>
+  </div>
+</div>
+<button class="showBtn2" (click)="showCollaborations()" *ngIf="collaborations.length>2">{{showMoreInvitations ? 'Show less' : 'Show all'}}</button>
+</div>
+>>>>>>> feature/dashboard

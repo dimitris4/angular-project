@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomepageComponent, canActivate: [AuthGuard],
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'posts', component: PostsComponent },
       { path: 'events', component: EventsComponent },
       { path: 'chats', component: ChatsComponent },
