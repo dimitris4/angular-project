@@ -39,8 +39,16 @@
         <h4>Add media</h4>
         <p>You can add one media type to your post. If you want to change the media type,<br>you need to delete the added media first.</p>
         <div style="display: flex; flex-wrap: wrap;">
-          <button class="media-button" mat-raised-button>
-            <span class="button-icon material-icons">insert_photo</span>
+          <input
+            style="display: none"
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            #fileInput
+          >
+
+          <button class="media-button" mat-raised-button (click)="fileInput.click()">
+            <span class="material-icons">insert_photo</span>
             Photo(s)
           </button>
           <button class="media-button" mat-raised-button>
@@ -53,6 +61,10 @@
           </button>
         </div>
       </div>
+
+      <button type="button" (click)="onUpload()">Upload</button>
+
+
 
       <br>
 

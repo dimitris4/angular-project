@@ -1,15 +1,16 @@
-import { NgRedux } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PostsService } from '../../service/posts.service';
-import { Post } from '../../../entities/Post';
-import { User } from '../../../entities/User';
-import { PostActions } from '../../../store/actions/PostActions';
-import { AppState } from '../../../store/Store';
-import { Collection } from '../../../entities/Collection';
+import {NgRedux} from '@angular-redux/store';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PostsService} from '../../service/posts.service';
+import {Post} from '../../../entities/Post';
+import {User} from '../../../entities/User';
+import {PostActions} from '../../../store/actions/PostActions';
+import {AppState} from '../../../store/Store';
+import {Collection} from '../../../entities/Collection';
 import {AuthService} from '../../../auth.service';
 import {Collaboration} from '../../../entities/Collaboration';
+import {HttpClient, HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-neweditpost',
@@ -17,6 +18,18 @@ import {Collaboration} from '../../../entities/Collaboration';
   styleUrls: ['./neweditpost.component.scss']
 })
 export class NeweditpostComponent implements OnInit {
+
+  constructor(
+    private route: ActivatedRoute,
+    private postsService: PostsService,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private postActions: PostActions,
+    private ngRedux: NgRedux<AppState>,
+    private http: HttpClient
+  ) { }
+
   public selectedPost;
   public postForm: FormGroup;
   public title: string;
@@ -28,15 +41,7 @@ export class NeweditpostComponent implements OnInit {
     {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
     {id: '4', title: 'Summer collection'}];
 
-  constructor(
-    private route: ActivatedRoute,
-    private postsService: PostsService,
-    private authService: AuthService,
-    private fb: FormBuilder,
-    private router: Router,
-    private postActions: PostActions,
-    private ngRedux: NgRedux<AppState>
-  ) { }
+  public selectedFile: File = null;
 
   ngOnInit(): void {
     this.route.paramMap
@@ -125,5 +130,28 @@ export class NeweditpostComponent implements OnInit {
   deletePostOnClick(): void {
     this.postActions.deletePost(this.selectedPost);
     this.router.navigate(['home/posts']);
+  }
+
+  onFileSelected(event): void {
+    console.log(event);
+    this.selectedFile = (event.target.files[0] as File);
+  }
+
+  onUpload(): void {
+    const data = new FormData();
+    data.append('image', this.selectedFile, this.selectedFile.name);
+    // I Need the URL for this to work
+    this.http.post('URL', data, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          console.log('Upload Progres: ' + Math.round(event.loaded / event.total * 100) + '%');
+        } else if (event.type === HttpEventType.Response) {
+          console.log(event);
+        }
+        console.log(event);
+      });
   }
 }

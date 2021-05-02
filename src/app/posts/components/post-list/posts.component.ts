@@ -32,7 +32,7 @@ export class PostsComponent implements OnInit {
       this.posts = res.posts;
     });
     if (this.newPostCreated) {
-      this.dialog.open(AlertBoxComponent);
+      // this.dialog.open(AlertBoxComponent);
     }
   }
 
