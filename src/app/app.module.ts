@@ -42,6 +42,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -73,7 +74,7 @@ import {MatRippleModule} from '@angular/material/core';
         MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
         MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
         AngularFireModule.initializeApp(undefined, undefined),
-        AngularFireDatabaseModule, MatRippleModule,
+        AngularFireDatabaseModule, MatRippleModule, MatRadioModule,
     ],
 
   providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
