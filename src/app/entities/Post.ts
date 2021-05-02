@@ -1,5 +1,6 @@
 import {Collaboration} from './Collaboration';
 
+import { User } from 'src/app/entities/User';
 export class Post {
   id?: string;
   createdDate: Date;

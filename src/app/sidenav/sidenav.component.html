@@ -1,29 +1,61 @@
 <mat-selection-list [multiple]="false">
-  <mat-list-option routerLink="posts" routerLinkActive="active" class="e2e-posts">
+  <mat-list-item class="e2e-posts">
     <div class="sidenav-item">
-      <span class="material-icons">arrow_back</span>
+      <button mat-icon-button class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       Organisation name
+    </div>
+  </mat-list-item>
+
+  <mat-divider></mat-divider>
+
+  <mat-list-option routerLink="dashboard" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">poll</span>
+      Dashboard
+    </div>
+  </mat-list-option>
+
+  <mat-list-option routerLink="profile" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">account_box</span>
+      Public profile
+    </div>
+  </mat-list-option>
+
+  <mat-list-option routerLink="dashboard" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">poll</span>
+      Dashboard
     </div>
   </mat-list-option>
 
   <mat-list-option routerLink="posts" routerLinkActive="active" class="e2e-posts">
     <div class="sidenav-item">
-      <span class="material-icons">post_add</span>
+      <span class="material-icons">view_list</span>
       Posts
+    </div>
+  </mat-list-option>
+
+  <mat-list-option routerLink="collections" routerLinkActive="active" class="e2e-posts">
+    <div class="sidenav-item">
+      <span class="material-icons">view_array</span>
+      Collections
     </div>
   </mat-list-option>
 
   <mat-list-option routerLink="events" routerLinkActive="active">
     <div class="sidenav-item">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-        Events
+      <mat-icon aria-hidden="false" aria-label="Example home icon">event</mat-icon>
+        //Events
     </div>
   </mat-list-option>
 
   <mat-list-option routerLink="chats" routerLinkActive="active">
     <div class="sidenav-item">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-        Chats
+      <mat-icon aria-hidden="false" aria-label="Example home icon">question_answer</mat-icon>
+        //Chats
     </div>
   </mat-list-option>
 
