@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
       retypePassword: ['', [Validators.required]],
       firstName: [''],
       lastName: [''],
+      userType: ['', [Validators.required]],
       acceptTerms: [false, Validators.requiredTrue]
     },
     {
@@ -48,7 +49,8 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
-    this.userActions.signup(this.registrationForm.value.email, this.registrationForm.value.password);
+    console.log(this.registrationForm.value);
+    this.userActions.signup(this.registrationForm.value);
     this.ngRedux
       .select(state => state.errors)
       .subscribe(res => {
