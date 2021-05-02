@@ -4,8 +4,8 @@ import { Injectable, NgZone } from '@angular/core';
 import { AppState } from './store/Store';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
-import {User} from "./entities/User";
-import {Post} from "./entities/Post";
+import {User} from './entities/User';
+import {Post} from './entities/Post';
 
 @Injectable({
   providedIn: 'root'
