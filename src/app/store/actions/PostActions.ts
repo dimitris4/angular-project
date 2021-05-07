@@ -45,9 +45,12 @@ export class PostActions {
   }
 
   updatePost(updatedPost: Post): void {
-    this.ngRedux.dispatch({
-        type: PostActions.UPDATE_POST,
-        payload: updatedPost
+    this.postService.updatePost(updatedPost)
+      .subscribe((result:any) => {
+        this.ngRedux.dispatch({
+          type: PostActions.UPDATE_POST,
+          payload: updatedPost
+      });
     });
   }
 

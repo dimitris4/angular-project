@@ -1,3 +1,4 @@
+import { Collaboration } from './../entities/Collaboration';
 import { Post } from 'src/app/entities/Post';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppState } from '../../app/store/Store';
@@ -14,8 +15,8 @@ export class DashboardComponent implements OnInit {
 
   public posts: Post[];
   public user;
-  public invitations : Post[];
-  public collaborations : Post[];
+  public invitations;
+  public collaborations;
   public showMoreInvitations;
   public showMoreCollaborations;
 
@@ -29,19 +30,21 @@ export class DashboardComponent implements OnInit {
 
    this.postActions.readPosts();
     this.ngRedux.select(state => state.posts).subscribe(res => {
-      this.posts = res.posts;
 
-      this.invitations =  res.posts
-      .filter(post => post.collaborations
-      .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === false));
+      this.user = JSON.parse(localStorage.getItem('user'));
+
+     this.invitations = res.posts
+                .filter(post => post.collaborations
+                .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === false));
 
       this.collaborations = res.posts
-      .filter(post => post.collaborations
-      .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === true));
+                .filter(post => post.collaborations
+                .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === true));
+
     });
 
 
-    this.user = JSON.parse(localStorage.getItem('user'));
+
     this.showMoreInvitations = false;
     this.showMoreCollaborations = false;
 
@@ -54,15 +57,19 @@ export class DashboardComponent implements OnInit {
     this.showMoreCollaborations = !this.showMoreCollaborations;
   }
 
-  declineCollaboration(){
-    // remove from invitations
+  acceptCollaboration(post){
+    const newPost = post;
+    newPost.collaborations.forEach(col => {
+      if(col.email === this.user.email)
+        col.accepted = true;
+    });
+    this.postActions.updatePost(newPost);
   }
-  acceptCollaboration(){
-    // move to collaboration
 
-  }
-  removeCollaboration(){
 
+  removeCollaboration(post){
+    post.collaborations = post.collaborations.filter(col => col.email !== this.user.email);
+    this.postActions.updatePost(post);
   }
 
 }
