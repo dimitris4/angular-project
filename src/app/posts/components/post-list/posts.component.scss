@@ -1,29 +1,26 @@
-.example-card {
-  width: 300px;
-  margin: 20px;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.main-container{
+  width: 95%;
+  margin: 3rem 20rem 3rem 3rem;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
 }
 
 .flexGrid {
   display: flex;
   flex: 1;
   flex-wrap: wrap;
+  padding-bottom: 1rem;
 }
 
 .flexHeader {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
   align-items: center;
 }
 
-mat-chip {
-  //transition: none !important;
-  box-shadow: none !important;
+h2{
+  color:#32305d;
 }
 
 .form {
@@ -39,15 +36,6 @@ mat-chip {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.main-container{
-  width: 95%;
-  margin-left: 2em;
-  margin-top: 3em;
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 3em;
 }
 
 .mat-table{
@@ -101,8 +89,4 @@ mat-chip {
 
 .table-column{
   padding-right: 1em;
-}
-
-h3{
-  font-size: x-large;
 }

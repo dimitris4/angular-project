@@ -43,11 +43,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
-<<<<<<< HEAD
-=======
-
->>>>>>> bc555e23ca62a722f6bee95885243a5eeae250ca
-
 
 @NgModule({
   declarations: [

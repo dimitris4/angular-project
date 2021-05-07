@@ -1,14 +1,19 @@
 .dashboard{
   background-color: white;
-  margin:3rem;
-  padding-left:2rem;
-  padding-right:2rem;
-  padding-top:1rem;
-  margin-right:20rem;
-  border-radius: 5px;
+  padding: 1rem 2rem;
+  margin: 3rem 20rem 3rem 3rem;
+  border-radius: 10px;
 }
 
-.title{
+.main-container{
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color:#32305d;
 }
 
@@ -51,8 +56,6 @@
   text-align: center;
 }
 
-
-
 .dashboard-collabs{
   padding-top: 1.8rem;
   padding-right: 1.8rem;
@@ -65,7 +68,6 @@
 
 .post-title{
   font-weight:900;
-
 }
 
 .post-date{
