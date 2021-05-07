@@ -24,7 +24,6 @@ const routes: Routes = [
       { path: 'events', component: EventsComponent },
       { path: 'chats', component: ChatsComponent },
       { path: 'posts/:id', component: NeweditpostComponent },
-      { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'collections', component: CollectionsComponent },
       ]
