@@ -31,9 +31,9 @@ export class PostsComponent implements OnInit {
     this.ngRedux.select(state => state.posts).subscribe(res => {
       this.posts = res.posts;
     });
-    if (this.newPostCreated) {
-      this.dialog.open(AlertBoxComponent);
-    }
+    // if (this.newPostCreated) {
+    //   this.dialog.open(AlertBoxComponent);
+    // }
   }
 
   editPost(id: any): void {
