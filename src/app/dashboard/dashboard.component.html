@@ -6,12 +6,12 @@
   <div class="dashboard-collabs" *ngIf="showMoreInvitations ? true : i<2">
     <div class="info-text">
       <span class="post-title">Post • {{post.title}}</span><br>
-      <p class="post-date">{{post.organization}} • {{post.createdDate}}</p><br>
+      <p class="post-date">{{post.author}} • {{post.createdDate}}</p><br>
       <p class="post-text">{{post.text}}</p>
     </div>
     <div>
-      <button class="acceptBtn">Accept</button>
-      <button class="declineBtn">Decline</button>
+      <button class="acceptBtn" (click)="acceptCollaboration()">Accept</button>
+      <button class="declineBtn" (click)="declineCollaboration()">Decline</button>
     </div>
   </div>
 </div>
@@ -23,11 +23,11 @@
   <div class="dashboard-collabs" *ngIf="showMoreCollaborations ? true : i<2">
     <div class="info-text">
       <span class="post-title">Post • {{post.title}}</span><br><br>
-      <span class="post-date">{{post.organization}} • {{post.createdDate}}</span><br>
+      <span class="post-date">{{post.author}} • {{post.createdDate}}</span><br>
       <p class="post-text" >{{post.text}}</p>
     </div>
     <div>
-      <button class="declineBtn">Remove</button>
+      <button class="declineBtn" (click)="removeCollaboration()">Remove</button>
     </div>
   </div>
 </div>
