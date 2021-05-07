@@ -37,14 +37,12 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
-import {AngularFireModule} from "@angular/fire";
+import {AngularFireModule} from '@angular/fire';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
-
-
 
 @NgModule({
   declarations: [
@@ -74,7 +72,7 @@ import {MatRadioModule} from '@angular/material/radio';
         MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
         MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
         AngularFireModule.initializeApp(undefined, undefined),
-        AngularFireDatabaseModule, MatRippleModule, MatRadioModule,
+        AngularFireDatabaseModule, MatRippleModule, MatRadioModule
     ],
 
   providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
