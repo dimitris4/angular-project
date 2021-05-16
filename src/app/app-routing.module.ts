@@ -11,7 +11,8 @@ import {SecureInnerPagesGuard} from './secure-inner-pages.guard';
 import {AuthGuard} from './auth.guard';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfileComponent} from './profile/profile.component';
-import {CollectionsComponent} from './collections/collections.component';
+import {CollectionsComponent} from './collections/components/collection-list/collections.component';
+import {NeweditcollectionComponent} from './collections/components/neweditcollection/neweditcollection.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'posts/:id', component: NeweditpostComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'collections', component: CollectionsComponent },
+      { path: 'collections/:id', component: NeweditcollectionComponent },
       ]
   }
 ];

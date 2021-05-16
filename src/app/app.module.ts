@@ -40,9 +40,10 @@ import {AuthService} from './auth.service';
 import {AngularFireModule} from '@angular/fire';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CollectionsComponent } from './collections/collections.component';
+import { CollectionsComponent } from './collections/components/collection-list/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import { NeweditcollectionComponent } from './collections/components/neweditcollection/neweditcollection.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {MatRadioModule} from '@angular/material/radio';
     HomepageComponent,
     DashboardComponent,
     ProfileComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    NeweditcollectionComponent,
   ],
     imports: [
         BrowserModule,
