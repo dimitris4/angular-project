@@ -44,14 +44,22 @@
             type="file"
             (change)="onFileSelected($event)"
             accept="image/*"
-            #fileInput
+            #imageInput
           >
 
-          <button class="media-button" mat-raised-button (click)="fileInput.click()">
+          <input
+            style="display: none"
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="video/*"
+            #videoInput
+          >
+
+          <button class="media-button" mat-raised-button (click)="imageInput.click()">
             <span class="material-icons">insert_photo</span>
             Photo(s)
           </button>
-          <button class="media-button" mat-raised-button>
+          <button class="media-button" mat-raised-button (click)="videoInput.click()">
             <span class="material-icons">smart_display</span>
             Video
           </button>

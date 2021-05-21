@@ -37,12 +37,15 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
-import {AngularFireModule} from "@angular/fire";
+import {AngularFireModule} from '@angular/fire';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
+import { UploadsListComponent } from './uploads/uploads-list/uploads-list.component';
+import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.component';
+import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
 
 
 
@@ -61,7 +64,10 @@ import {MatRadioModule} from '@angular/material/radio';
     HomepageComponent,
     DashboardComponent,
     ProfileComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    UploadsListComponent,
+    UploadDetailComponent,
+    UploadFormComponent
   ],
     imports: [
         BrowserModule,
