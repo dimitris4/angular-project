@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadFormComponent } from './upload-form.component';
+import { UploadTaskComponent } from './upload-task.component';
 
-describe('UploadFormComponent', () => {
-  let component: UploadFormComponent;
-  let fixture: ComponentFixture<UploadFormComponent>;
+describe('UploadTaskComponent', () => {
+  let component: UploadTaskComponent;
+  let fixture: ComponentFixture<UploadTaskComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UploadFormComponent ]
+      declarations: [ UploadTaskComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadFormComponent);
+    fixture = TestBed.createComponent(UploadTaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

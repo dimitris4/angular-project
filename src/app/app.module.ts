@@ -38,16 +38,19 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireStorage} from '@angular/fire/storage';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
-import { UploadsListComponent } from './uploads/uploads-list/uploads-list.component';
-import { UploadDetailComponent } from './uploads/upload-detail/upload-detail.component';
-import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
 
-
+import { environment } from '../environments/environment';
+import { DropzoneDirective } from './dropzone.directive';
+import { UploaderComponent } from './uploader/uploader.component';
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 
 @NgModule({
   declarations: [
@@ -65,9 +68,9 @@ import { UploadFormComponent } from './uploads/upload-form/upload-form.component
     DashboardComponent,
     ProfileComponent,
     CollectionsComponent,
-    UploadsListComponent,
-    UploadDetailComponent,
-    UploadFormComponent
+    DropzoneDirective,
+    UploaderComponent,
+    UploadTaskComponent
   ],
     imports: [
         BrowserModule,
@@ -79,11 +82,14 @@ import { UploadFormComponent } from './uploads/upload-form/upload-form.component
         MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
         MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
         MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
-        AngularFireModule.initializeApp(undefined, undefined),
-        AngularFireDatabaseModule, MatRippleModule, MatRadioModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        MatRippleModule, MatRadioModule,
     ],
 
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
+  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, AngularFireStorage],
 
   bootstrap: [AppComponent]
 })
