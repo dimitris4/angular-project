@@ -38,43 +38,9 @@
       <div>
         <h4>Add media</h4>
         <p>You can add one media type to your post. If you want to change the media type,<br>you need to delete the added media first.</p>
-        <div style="display: flex; flex-wrap: wrap;">
-          <input
-            style="display: none"
-            type="file"
-            (change)="onFileSelected($event)"
-            accept="image/*"
-            #imageInput
-          >
-
-          <input
-            style="display: none"
-            type="file"
-            (change)="onFileSelected($event)"
-            accept="video/*"
-            #videoInput
-          >
-
-          <button class="media-button" mat-raised-button (click)="imageInput.click()">
-            <span class="material-icons">insert_photo</span>
-            Photo(s)
-          </button>
-          <button class="media-button" mat-raised-button (click)="videoInput.click()">
-            <span class="material-icons">smart_display</span>
-            Video
-          </button>
-          <button class="media-button" mat-raised-button>
-            <span class="material-icons">podcasts</span>
-            Podcast
-          </button>
-        </div>
 
         <app-uploader></app-uploader>
       </div>
-
-      <button type="button" (click)="onUpload()">Upload</button>
-
-
 
       <br>
 

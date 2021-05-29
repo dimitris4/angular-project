@@ -43,7 +43,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireStorage} from '@angular/fire/storage';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CollectionsComponent } from './collections/collections.component';
+// import { CollectionsComponent } from './collections/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 
@@ -67,7 +67,7 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
     HomepageComponent,
     DashboardComponent,
     ProfileComponent,
-    CollectionsComponent,
+    // CollectionsComponent,
     DropzoneDirective,
     UploaderComponent,
     UploadTaskComponent

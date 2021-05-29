@@ -5,18 +5,59 @@
   (dropped)="onDrop($event)"
   [class.hovering]="isHovering"
 >
-  <h3>AngularFire Drop Zone</h3>
-  <p>Drag and Drop a File</p>
+  <h3>Drag and Drop a File</h3>
+  <p>Or Pick a File</p>
 
   <div class="file">
     <label class="file-label">
-      <input class="file-input" type="file" (change)="onDrop($event.target.files)">
+      <input
+        style="display: none"
+        type="file"
+        accept="image/*"
+        (change)="onDrop($event.target.files)"
+        #imageInput
+      >
+
+      <input
+        style="display: none"
+        type="file"
+        accept="video/*"
+        (change)="onDrop($event.target.files)"
+        #videoInput
+      >
+
+      <input
+        style="display: none"
+        type="file"
+        accept="audio/*"
+        (change)="onDrop($event.target.files)"
+        #audioInput
+      >
+
+      <button class="media-button" mat-raised-button (click)="imageInput.click()">
+        <span class="material-icons">insert_photo</span>
+        Photo(s)
+      </button>
+
+      <button class="media-button" mat-raised-button (click)="videoInput.click()">
+        <span class="material-icons">smart_display</span>
+        Video(s)
+      </button>
+      <button class="media-button" mat-raised-button (click)="audioInput.click()">
+        <span class="material-icons">podcasts</span>
+        Podcast(s)
+      </button>
     </label>
   </div>
 </div>
 
-<h3>Uploads</h3>
+<h3 *ngIf="files.length > 0">Uploads</h3>
 
 <div *ngFor="let file of files">
   <app-upload-task [file]="file"></app-upload-task>
 </div>
+
+
+
+
+
