@@ -1,16 +1,16 @@
 <div class="main-container">
   <div class="flexHeader">
-    <h2>Posts</h2>
-    <button class="e2e-new" mat-raised-button color="primary" [routerLink]="['/home/posts', 'create']" id="newPostBtn">
+    <h2>Collections</h2>
+    <button class="e2e-new" mat-raised-button color="primary" [routerLink]="['/home/collections', 'create']" id="newPostBtn">
       <div class="button-content">
-        <span>New post</span>
+        <span>New collection</span>
         <span class="new-post-icon material-icons">add_circle</span>
       </div>
     </button>
   </div>
 
   <div class="flexGrid">
-    <table mat-table [dataSource]="posts" class="mat-elevation-z0">
+    <table mat-table [dataSource]="collections" class="mat-elevation-z0">
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -18,18 +18,18 @@
       <!-- Position Column -->
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef><b>Title</b></th>
-        <td mat-cell *matCellDef="let post"> {{ post.title }} </td>
+        <td mat-cell *matCellDef="let collection"> {{ collection.title }} </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="createdDate">
         <th mat-header-cell *matHeaderCellDef><b>Created</b></th>
-        <td mat-cell *matCellDef="let post"> {{ post.createdDate | date: 'd MMM, y' }} </td>
+        <td mat-cell *matCellDef="let collection"> {{ collection.createdDate | date: 'd MMM, y' }} </td>
       </ng-container>
 
-      <ng-container matColumnDef="activity">
-        <th mat-header-cell *matHeaderCellDef><b>Activity</b></th>
-        <td mat-cell *matCellDef="let post" class="table-column">
+      <ng-container matColumnDef="contents">
+        <th mat-header-cell *matHeaderCellDef><b>Contents</b></th>
+        <td mat-cell *matCellDef="let collection" class="table-column">
           <div style="display: flex; justify-content: start">
             <div style="margin-right: 2.5em; position: relative;">
               <span class="material-icons thumbnail-icon">thumb_up</span>
@@ -43,18 +43,18 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef><b>Type</b></th>
-        <td mat-cell *matCellDef="let post" class="table-column">Video</td>
-      </ng-container>
+<!--      <ng-container matColumnDef="type">-->
+<!--        <th mat-header-cell *matHeaderCellDef><b>Type</b></th>-->
+<!--        <td mat-cell *matCellDef="let post" class="table-column">Video</td>-->
+<!--      </ng-container>-->
 
       <!-- Status column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef><b>Status</b></th>
-        <td mat-cell *matCellDef="let post">
+        <td mat-cell *matCellDef="let collection">
           <div class="container">
-            <div class="item" [ngClass]="{'text-draft': post.status === 'DRAFT'}">
-              <span class="text">{{ post.status }}</span>
+            <div class="item" [ngClass]="{'text-draft': collection.status === 'DRAFT'}">
+              <span class="text">{{ collection.status }}</span>
             </div>
           </div>
         </td>
@@ -62,8 +62,8 @@
 
       <ng-container matColumnDef="edit">
         <th mat-header-cell  *matHeaderCellDef ></th>
-        <td mat-cell *matCellDef="let post" >
-          <button mat-stroked-button color="primary" [routerLink]="['/home/posts', post.id]">Edit</button>
+        <td mat-cell *matCellDef="let collection" >
+          <button mat-stroked-button color="primary" [routerLink]="['/home/collections', collection.id]">Edit</button>
         </td>
       </ng-container>
 
@@ -73,3 +73,4 @@
     </table>
   </div>
 </div>
+

@@ -24,9 +24,11 @@ export class NeweditpostComponent implements OnInit {
   public published: boolean;
   public organisationList: User[];
   // replace dummy data with API call in the future
-  public availableCollections: Collection[] = [{id: '1', title: 'My favorite collection'},
-    {id: '2', title: 'Events collection'}, {id: '3', title: 'Classroom collection'},
-    {id: '4', title: 'Summer collection'}];
+  public availableCollections: Collection[] = [
+    {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
 
   constructor(
     private route: ActivatedRoute,
