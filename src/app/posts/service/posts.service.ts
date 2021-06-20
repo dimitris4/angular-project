@@ -30,4 +30,9 @@ export class PostsService extends ApiService {
     const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts/${updatedPost.id}.json?auth=${this.token}`;
     return this.http.patch(url, updatedPost, this.getHttpOptions());
   }
+
+  deletePost(post: Post): any {
+    const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts/${post.id}.json?auth=${this.token}`;
+    return this.http.delete(url);
+  }
 }

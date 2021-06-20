@@ -126,6 +126,6 @@ export class NeweditpostComponent implements OnInit {
 
   deletePostOnClick(): void {
     this.postActions.deletePost(this.selectedPost);
-    this.router.navigate(['home/posts']);
+    this.router.navigate(['home/posts'], { state: { postDeleted: true } });
   }
 }
