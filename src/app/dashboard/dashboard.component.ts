@@ -13,8 +13,6 @@ import {User} from '../entities/User';
 export class DashboardComponent implements OnInit {
   public posts: Post[];
   public user: User;
-  public invitations: Post[];
-  public collaborations: Post[];
   public showMoreInvitations: boolean;
   public showMoreCollaborations: boolean;
 
@@ -27,12 +25,7 @@ export class DashboardComponent implements OnInit {
      this.postActions.readPosts();
      this.ngRedux.select(state => state.posts).subscribe(res => {
        this.user = JSON.parse(localStorage.getItem('user'));
-       this.invitations = res.posts
-                  .filter(post => post.collaborations
-                  .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === false));
-       this.collaborations = res.posts
-                  .filter(post => post.collaborations
-                  .some(collaboration => collaboration.email === this.user.email && collaboration.accepted === true));
+       this.posts = res.posts.filter(post => post.collaborations !== undefined);
       });
      this.showMoreInvitations = false;
      this.showMoreCollaborations = false;
@@ -59,5 +52,53 @@ export class DashboardComponent implements OnInit {
   removeCollaboration(post): void {
     post.collaborations = post.collaborations.filter(col => col.email !== this.user.email);
     this.postActions.updatePost(post);
+  }
+
+  getInvitations(): Post[] {
+    const invitations = [];
+    for (const post of this.posts) {
+      for (const collaboration of post.collaborations) {
+        if (collaboration.email === this.user.email && !collaboration.accepted) {
+          invitations.push(post);
+        }
+      }
+    }
+    return invitations;
+  }
+
+  getCollaborations(): Post[] {
+    const collaborations = [];
+    for (const post of this.posts) {
+      for (const collaboration of post.collaborations) {
+        if (collaboration.email === this.user.email && collaboration.accepted) {
+          collaborations.push(post);
+        }
+      }
+    }
+    return collaborations;
+  }
+
+  getInvitationsLength(): number {
+    const invitations = [];
+    for (const post of this.posts) {
+      for (const collaboration of post.collaborations) {
+        if (collaboration.email === this.user.email && !collaboration.accepted) {
+          invitations.push(post);
+        }
+      }
+    }
+    return invitations.length;
+  }
+
+  getCollaborationsLength(): number {
+    const collaborations = [];
+    for (const post of this.posts) {
+      for (const collaboration of post.collaborations) {
+        if (collaboration.email === this.user.email && collaboration.accepted) {
+          collaborations.push(post);
+        }
+      }
+    }
+    return collaborations.length;
   }
 }

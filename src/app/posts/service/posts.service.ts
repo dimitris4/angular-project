@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {ApiService} from '../../api.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {NgRedux} from '@angular-redux/store';
-import {AppState} from '../../store/Store';
 import {Post} from '../../entities/Post';
 
 @Injectable({
@@ -14,7 +12,7 @@ export class PostsService extends ApiService {
 
   private token = localStorage.getItem('token');
 
-  constructor(private http: HttpClient, private ngRedux: NgRedux<AppState>) {
+  constructor(private http: HttpClient) {
     super();
   }
 
@@ -28,8 +26,7 @@ export class PostsService extends ApiService {
     return this.http.post(url, post, this.getHttpOptions());
   }
 
-  updatePost(updatedPost: Post) {
-
+  updatePost(updatedPost: Post): Observable<ArrayBuffer> {
     const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts/${updatedPost.id}.json?auth=${this.token}`;
     return this.http.patch(url, updatedPost, this.getHttpOptions());
   }
