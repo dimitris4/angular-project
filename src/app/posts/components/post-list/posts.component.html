@@ -31,9 +31,9 @@
         <th mat-header-cell *matHeaderCellDef><b>Activity</b></th>
         <td mat-cell *matCellDef="let post" class="table-column">
           <div style="display: flex; justify-content: start">
-            <div style="margin-right: 2.5em; position: relative;">
-              <span class="material-icons thumbnail-icon">thumb_up</span>
-              <span style="position: absolute; bottom: 2px; margin-left: 3px;">1</span>
+            <div style="margin-right: 2.5em; position: relative; cursor: pointer" (click)="onClickLikePost(post)">
+              <span class="material-icons thumbnail-icon" [ngClass]="{'not-liked': !isPostLiked(post)}">thumb_up</span>
+              <span style="position: absolute; bottom: 2px; margin-left: 3px;">{{ post.likes.length }}</span>
             </div>
             <div style="position: relative;">
               <span class="material-icons comment-icon thumbnail-icon">comment</span>

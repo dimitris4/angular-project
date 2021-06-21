@@ -75,8 +75,7 @@ export class NeweditpostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.selectedPost = this.postForm.value;
-
+    Object.assign(this.selectedPost, this.postForm.value);
     const collaborationArray = [];
     if (this.postForm.controls.collaborations.value !== null) {
       if (this.postForm.controls.collaborations.value.length > 0) {
@@ -94,11 +93,17 @@ export class NeweditpostComponent implements OnInit {
     this.selectedPost.author = loggedInUser.email;
 
     this.published ? this.selectedPost.status = 'PUBLISHED' : this.selectedPost.status = 'DRAFT';
-    console.log(this.selectedPost);
     if (this.postForm.valid) {
-      // saves the post in the service and navigates to the posts list
+      // creates new post
       if (!this.editMode) {
         // this.selectedPost.id = String(Math.floor(Math.random() * 100));
+        // add 'likes' property to the new post
+        const likes = [];
+        const testUser = new User();
+        testUser.id = 'newuserid';
+        testUser.email = 'test@test.com';
+        likes.push(testUser);
+        this.selectedPost.likes = likes;
         this.selectedPost.createdDate = new Date();
         this.postActions.addPost(this.selectedPost);
         this.router.navigate(['home/posts'], {state: {postCreated: true}});
