@@ -1,0 +1,253 @@
+.container-main{
+  width: 93%;
+  display:grid;
+  grid-template-columns: 65% 35%;
+  flex-wrap: wrap;
+  grid-template-rows: 100px 2fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 2em;
+  margin: auto auto 1em 2em;
+}
+
+.back-button{
+  grid-area: 1 / 1 / 2 / 2;
+  align-self: center;
+  justify-self: auto;
+  color: darkblue;
+  text-decoration: none;
+  font-max-size: xx-small;
+  padding-left: 10px;
+}
+
+.form {
+  background-color: white;
+  padding: 20px;
+  //margin-top: 40px;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+  grid-area: 2 / 1 / 4 / 2;
+}
+
+.invites{
+  grid-area: 3 / 2 / 4 / 3;
+  width: 90%;
+  padding:10px;
+  margin: auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+#input_text {
+  height: 150px;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-button {
+  background-color: mediumpurple;
+  color: white;
+  width: 160px;
+  height: 50px;
+  margin-right: 25px;
+}
+
+.collections-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #F0F0F0;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-top: 10px;
+}
+
+.submit-button{
+  height: 50px;
+}
+
+.white-button{
+  background-color: white;
+  color:black;
+  border: solid 1px #303030;
+}
+
+.green-button{
+  background-color: mediumseagreen;
+}
+
+.button-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap:1em;
+  column-gap:2em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-icon{
+  font-size: 15px;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: mediumpurple; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: lightgray;  /*replace with your color*/
+}
+
+p {
+  color: dimgrey;
+  font-size: 14px;
+  margin-top: 5px;
+  line-height: 1.5em;
+}
+
+h4{
+  margin-bottom: 0px;
+  color: rebeccapurple;
+}
+
+h3{
+  color: rebeccapurple;
+  margin-top: 5px;
+  font-size: x-large;
+}
+
+.subtitle-collaboration{
+  font-size: 12px;
+  color: darkgray;
+}
+
+.invites h4{
+  margin-top:0px;
+}
+
+.select-container{
+  width: 400px;
+  font-size: 13px;
+}
+
+.collaboration-invite-container{
+  display: flex;
+  justify-content: space-between;
+  border-radius:10px;
+  background-color: #F0F0F0;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.icon-left{
+  width: 15%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+}
+
+.cover{
+  width: 40px;
+  height: 30px;
+  background-color: mediumseagreen;
+  right:10px;
+}
+
+span {
+  font-size: 14px;
+}
+
+.text-and-right-icon{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inside-button-container{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-section-container {
+  background-color: white;
+  width: 61%;
+  border-radius: 15px;
+  box-shadow: 0.5px 0.5px 2px 3px #ccc;
+  color: #303030;
+  margin-left: 2em;
+  margin-bottom: 5em;
+  padding-bottom: 1em;
+}
+
+.comment-section-container > .flexHeader{
+  margin-left: 1em;
+  padding-top: 2em;
+  color:red;
+}
+
+.comment-item{
+  width: 97%;
+  height: auto;
+  display:flex;
+  justify-content:space-between;
+  box-shadow: 0 3px 3px -2px gray;
+  margin: auto auto 1.5em;
+}
+
+.profile-picture{
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.profile-picture > img{
+  border-radius:50%;
+  max-height:100%;
+  max-width: 100%;
+}
+
+.comment-body{
+  width: 90%;
+  padding-bottom: 0.5em;
+}
+
+.comment-body > h4{
+  margin: 0;
+  color:#303030;
+}
+
+.comment-body > p{
+  margin-bottom: 5px;
+}
+
+.add-content-button{
+  color: white;
+  background-color: mediumpurple;
+  margin-right: 2em;
+  height: 4em;
+  width: 12em;
+}
+
+.material-icons{
+  font-size: 1.5em;
+  margin-right: 0.2em;
+}
+
+.add-content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -33,7 +33,7 @@ export class CollectionActions {
       });
   }
 
-  addPost(newCollection: Collection): void {
+  addCollection(newCollection: Collection): void {
     this.collectionsService.saveCollection(newCollection)
       .subscribe((result: any) => {
         // newPost.id = result.name;
@@ -44,21 +44,21 @@ export class CollectionActions {
       });
   }
 
-  // updatePost(updatedPost: Post): void {
-  //   this.postService.updatePost(updatedPost)
-  //     .subscribe((result:any) => {
-  //       this.ngRedux.dispatch({
-  //         type: PostActions.UPDATE_POST,
-  //         payload: updatedPost
-  //       });
-  //     });
-  // }
-  //
-  // deletePost(updatedPost: Post): void {
-  //   console.log('inside the action', updatedPost);
-  //   this.ngRedux.dispatch({
-  //     type: PostActions.DELETE_POST,
-  //     payload: updatedPost
-  //   });
-  // }
+  updateCollection(updatedCollection: Collection): void {
+    this.collectionsService.updateCollection(updatedCollection)
+      .subscribe((result: any) => {
+        this.ngRedux.dispatch({
+          type: CollectionActions.UPDATE_COLLECTION,
+          payload: updatedCollection
+        });
+      });
+  }
+
+  deleteCollection(updatedCollection: Collection): void {
+    console.log('inside the action', updatedCollection);
+    this.ngRedux.dispatch({
+      type: CollectionActions.DELETE_COLLECTION,
+      payload: updatedCollection
+    });
+  }
 }

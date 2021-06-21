@@ -25,8 +25,8 @@ export class CollectionsService extends ApiService {
     return this.http.post(url, collection, this.getHttpOptions());
   }
 
-  // updatePost(updatedPost: Post) {
-  //   const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/posts/${updatedPost.id}.json?auth=${this.token}`;
-  //   return this.http.patch(url, updatedPost, this.getHttpOptions());
-  // }
+  updateCollection(updatedCollection: Collection): Observable<ArrayBuffer> {
+    const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/collections/${updatedCollection.id}.json?auth=${this.token}`;
+    return this.http.patch(url, updatedCollection, this.getHttpOptions());
+  }
 }
