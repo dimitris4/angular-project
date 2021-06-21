@@ -6,7 +6,7 @@
 
 <div *ngIf="snapshot | async as snap">
 
-  {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
+  {{ snap.bytesTransferred }} bytes of {{ snap.totalBytes }} bytes
 
   <div *ngIf="downloadURL as url">
     <h3>Results!</h3>
@@ -20,3 +20,4 @@
   <button (click)="task.cancel()" [disabled]="!isActive(snap)">Cancel</button>
   <button (click)="task.resume()" [disabled]="!(snap?.state === 'paused')">Resume</button>
 </div>
+
