@@ -3,7 +3,7 @@
     <h2>Posts</h2>
     <button class="e2e-new" mat-raised-button color="primary" [routerLink]="['/home/posts', 'create']" id="newPostBtn">
       <div class="button-content">
-        <span>New post</span>
+        <span id="e2e-new-post">New post</span>
         <span class="new-post-icon material-icons">add_circle</span>
       </div>
     </button>
@@ -17,8 +17,8 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef><b>Title</b></th>
-        <td mat-cell *matCellDef="let post"> {{ post.title }} </td>
+        <th mat-header-cell *matHeaderCellDef><b >Title</b></th>
+        <td mat-cell id="e2e-post-title" *matCellDef="let post"> {{ post.title }} </td>
       </ng-container>
 
       <!-- Name Column -->
@@ -31,9 +31,9 @@
         <th mat-header-cell *matHeaderCellDef><b>Activity</b></th>
         <td mat-cell *matCellDef="let post" class="table-column">
           <div style="display: flex; justify-content: start">
-            <div style="margin-right: 2.5em; position: relative;">
-              <span class="material-icons thumbnail-icon">thumb_up</span>
-              <span style="position: absolute; bottom: 2px; margin-left: 3px;">1</span>
+            <div style="margin-right: 2.5em; position: relative; cursor: pointer" (click)="onClickLikePost(post)">
+              <span class="material-icons thumbnail-icon" [ngClass]="{'not-liked': !isPostLiked(post)}">thumb_up</span>
+              <span style="position: absolute; bottom: 2px; margin-left: 3px;">{{ post.likes.length }}</span>
             </div>
             <div style="position: relative;">
               <span class="material-icons comment-icon thumbnail-icon">comment</span>
@@ -63,7 +63,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell  *matHeaderCellDef ></th>
         <td mat-cell *matCellDef="let post" >
-          <button mat-stroked-button color="primary" [routerLink]="['/home/posts', post.id]">Edit</button>
+          <button id="e2e-edit-post-button" mat-stroked-button color="primary" [routerLink]="['/home/posts', post.id]">Edit</button>
         </td>
       </ng-container>
 

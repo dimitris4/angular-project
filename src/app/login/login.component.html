@@ -7,7 +7,7 @@
         <div style="margin-bottom: .5em;">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput formControlName = "email" type="email" name="email"
+            <input matInput formControlName = "email" type="email" name="email" id="e2e-email"
                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
           </mat-form-field>
           <div *ngIf="submitted && f.email.errors">
@@ -22,7 +22,7 @@
         <div style="margin-bottom: .5em;">
           <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput formControlName = "password" type="password" name="password"
+            <input matInput formControlName = "password" type="password" name="password" id="e2e-password"
                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
           </mat-form-field>
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -31,7 +31,7 @@
         </div>
         <!-- submit button -->
         <div>
-          <button mat-flat-button type="submit" color="primary" style="margin-top: 1em; width: 400px;font-size: 17px;padding: 8px;">Sign In</button>
+          <button mat-flat-button id="e2e-login-button" type="submit" color="primary" style="margin-top: 1em; width: 400px;font-size: 17px;padding: 8px;">Sign In</button>
         </div>
       </div>
     </div>

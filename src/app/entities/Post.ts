@@ -13,6 +13,7 @@ export class Post {
   collaborations?: Collaboration[];
   pinned?: boolean;
   author?: string;
+  likes?: User[];
 
   constructor() {
     this.title = '';
@@ -20,5 +21,6 @@ export class Post {
     this.collections = [];
     this.pinned = false;
     this.collaborations = [];
+    this.likes = [];
   }
 }

@@ -11,6 +11,8 @@ import {Collection} from '../../../entities/Collection';
 import {AuthService} from '../../../auth.service';
 import {Collaboration} from '../../../entities/Collaboration';
 import {HttpClient, HttpEventType} from '@angular/common/http';
+import {MatDialog} from '@angular/material/dialog';
+import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-neweditpost',
@@ -76,14 +78,15 @@ export class NeweditpostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.selectedPost = this.postForm.value;
-
+    Object.assign(this.selectedPost, this.postForm.value);
     const collaborationArray = [];
-    if (this.postForm.controls.collaborations.value.length > 0) {
-      for (const item of this.postForm.controls.collaborations.value) {
-        const newCollaboration = new Collaboration();
-        newCollaboration.email = item.email;
-        collaborationArray.push(newCollaboration);
+    if (this.postForm.controls.collaborations.value !== null) {
+      if (this.postForm.controls.collaborations.value.length > 0) {
+        for (const item of this.postForm.controls.collaborations.value) {
+          const newCollaboration = new Collaboration();
+          newCollaboration.email = item.email;
+          collaborationArray.push(newCollaboration);
+        }
       }
     }
     this.selectedPost.collaborations = collaborationArray;
@@ -93,17 +96,24 @@ export class NeweditpostComponent implements OnInit {
     this.selectedPost.author = loggedInUser.email;
 
     this.published ? this.selectedPost.status = 'PUBLISHED' : this.selectedPost.status = 'DRAFT';
-    console.log(this.selectedPost);
     if (this.postForm.valid) {
-      // saves the post in the service and navigates to the posts list
+      // creates new post
       if (!this.editMode) {
         // this.selectedPost.id = String(Math.floor(Math.random() * 100));
+        // add 'likes' property to the new post
+        const likes = [];
+        const testUser = new User();
+        testUser.id = 'newuserid';
+        testUser.email = 'test@test.com';
+        likes.push(testUser);
+        this.selectedPost.likes = likes;
         this.selectedPost.createdDate = new Date();
         this.postActions.addPost(this.selectedPost);
+        this.router.navigate(['home/posts'], {state: {postCreated: true}});
       } else {
         this.postActions.updatePost(this.selectedPost);
+        this.router.navigate(['home/posts']);
       }
-      this.router.navigate(['home/posts']);
     }
   }
 
@@ -130,8 +140,19 @@ export class NeweditpostComponent implements OnInit {
   }
 
   deletePostOnClick(): void {
-    this.postActions.deletePost(this.selectedPost);
-    this.router.navigate(['home/posts']);
+    const confirmDialog = this.dialog.open(AlertBoxComponent, {
+      data: {
+        title: 'Confirm Delete Post',
+        message: 'Are you sure, you want to delete a post: ' + this.selectedPost.title,
+      }
+    });
+
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.postActions.deletePost(this.selectedPost);
+        this.router.navigate(['home/posts'], {state: {postDeleted: true}});
+      }
+    });
   }
 
   onFileSelected(event): void {

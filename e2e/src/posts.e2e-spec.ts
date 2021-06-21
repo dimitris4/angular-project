@@ -1,55 +1,52 @@
-import { browser, element, by } from "protractor";
-import { AppPage } from "./app.po";
+import {browser, element, by} from 'protractor';
 
 describe('Posts section', () => {
-    let helper: AppPage;
+  const n = 3; // number of posts we want to add / delete
 
-    beforeEach(async() => {
-        helper = new AppPage();
+  // Login before all tests
+  beforeAll(async () => {
+    await browser.waitForAngularEnabled(false);
+    await browser.get('/login');
+    await element(by.id('e2e-email')).sendKeys('dimi@gmail.com');
+    await element(by.id('e2e-password')).sendKeys('123456');
+    await element(by.id('e2e-login-button')).click();
+    // browser must wait until the call to the API is made and current user is stored.
+    await browser.sleep(1000);
+  });
 
-        await browser.waitForAngularEnabled(false);
-        await browser.get('/');  // reload your SPA
-    });
+  // navigate to the Posts page before each test
+  beforeEach(async () => {
+    await browser.get('/home/posts'); // reload your SPA
+    await browser.sleep(1000);
+  });
 
-    it('Navigate to the edit post page', async() => {
-        // code here to test...
-        
-        await element(by.css(".e2e-posts")).click();
-        
-        await element.all(by.css(".e2e-edit")).first().click();
-        
-        expect(await element(by.css("h3")).getText()).toEqual("Edit Post");
-    });
+  it('Create new post', async () => {
+    const postsBeforeAdding: number = await (await element.all(by.id('e2e-post-title'))).length;
+    let postsAfterAdding: number;
+    for (let i = 0; i < n; i++) {
+      await element(by.css('.e2e-new')).click();
+      await element(by.id('e2e-new-post-title')).sendKeys('Is there life out there?');
+      await element(by.id('e2e-new-post-text')).sendKeys('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+      await element(by.id('submit_button')).click();
+      // must wait because it calls the API
+      await browser.sleep(1000);
+      postsAfterAdding = await (await element.all(by.id('e2e-post-title'))).length;
+    }
+    expect(postsAfterAdding).toEqual(postsBeforeAdding + n);
+  });
 
-    it('Navigate to the new post page', async() => {
-        // code here to test...
-        await element(by.css(".e2e-posts")).click();
-        
-        await element(by.id('newPostBtn')).click();
-        
-        expect(await element(by.css("h3")).getText()).toEqual("Create New Post");
-    });
+  // update post
 
-    it('Create new post', async() => {
-        await helper.navigateToPosts();
-        // await browser.sleep(500);
-        const postsBeforeAdding: number = await (await element.all(by.tagName('mat-card'))).length;
-        // expect(postsBeforeAdding.length).toEqual(0);
-
-        await helper.clickNewPostButton();
-        // await browser.sleep(500);
-        await element(by.id('titleInput')).sendKeys('Test Post');
-        await element(by.id('textInput')).sendKeys('This is the text of the Test Post');
-        await element(by.id('savePost')).click();
-
-        const postsAfterAdding: number = await (await element.all(by.tagName('mat-card'))).length;
-
-        expect(postsAfterAdding).toEqual(postsBeforeAdding + 1); // try to make more robust test-code
-        // instead of hardcoding numbers, like 5 and 6.
-        // expect(postsBeforeAdding.length).toEqual(1);
-
-     
-        
-
-    });
+  // delete post
+  it('Delete post', async () => {
+    const postsBeforeDeleting: number = await (await element.all(by.id('e2e-post-title'))).length;
+    let postsAfterDeleting: number;
+    for (let i = 0; i < n; i++) {
+      await element.all(by.id('e2e-edit-post-button')).get(postsBeforeDeleting - i - 1).click();
+      await element(by.id('delete_button')).click();
+      await browser.sleep(1000);
+      postsAfterDeleting = await (await element.all(by.id('e2e-post-title'))).length;
+    }
+    expect(postsAfterDeleting).toEqual(postsBeforeDeleting - n);
+  });
 });
