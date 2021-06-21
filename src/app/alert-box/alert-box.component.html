@@ -1,1 +1,12 @@
-<p>alert-box works!</p>
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  {{data.message}}
+</div>
+<div *ngIf="data.message !== ''" style="float:right; margin:20px;">
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" style="margin-right: 1em;">
+      <span>Confirm</span>
+    </button>
+    <button mat-raised-button color="secondary" [mat-dialog-close]="false">
+      <span>Cancel</span>
+    </button>
+</div>

@@ -5,8 +5,6 @@ import {PostsService} from '../../service/posts.service';
 import {Post} from '../../../entities/Post';
 import {PostActions} from '../../../store/actions/PostActions';
 import {AppState} from '../../../store/Store';
-import {MatDialog} from '@angular/material/dialog';
-import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-posts',
@@ -23,7 +21,6 @@ export class PostsComponent implements OnInit {
     private postsService: PostsService,
     private ngRedux: NgRedux<AppState>,
     private postActions: PostActions,
-    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -35,13 +32,9 @@ export class PostsComponent implements OnInit {
     this.ngRedux.select(state => state.posts).subscribe(res => {
       this.posts = res.posts;
     });
-    // if (this.newPostCreated) {
-    //   this.dialog.open(AlertBoxComponent);
-    // }
   }
 
   editPost(id: any): void {
     this.router.navigate(['home/neweditpost', {myId: id}]);
   }
-
 }

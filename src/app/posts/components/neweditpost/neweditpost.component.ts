@@ -1,15 +1,17 @@
-import { NgRedux } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PostsService } from '../../service/posts.service';
-import { Post } from '../../../entities/Post';
-import { User } from '../../../entities/User';
-import { PostActions } from '../../../store/actions/PostActions';
-import { AppState } from '../../../store/Store';
-import { Collection } from '../../../entities/Collection';
+import {NgRedux} from '@angular-redux/store';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PostsService} from '../../service/posts.service';
+import {Post} from '../../../entities/Post';
+import {User} from '../../../entities/User';
+import {PostActions} from '../../../store/actions/PostActions';
+import {AppState} from '../../../store/Store';
+import {Collection} from '../../../entities/Collection';
 import {AuthService} from '../../../auth.service';
 import {Collaboration} from '../../../entities/Collaboration';
+import {MatDialog} from '@angular/material/dialog';
+import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-neweditpost',
@@ -37,8 +39,10 @@ export class NeweditpostComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private postActions: PostActions,
-    private ngRedux: NgRedux<AppState>
-  ) { }
+    private ngRedux: NgRedux<AppState>,
+    private dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap
@@ -95,10 +99,11 @@ export class NeweditpostComponent implements OnInit {
         // this.selectedPost.id = String(Math.floor(Math.random() * 100));
         this.selectedPost.createdDate = new Date();
         this.postActions.addPost(this.selectedPost);
+        this.router.navigate(['home/posts'], {state: {postCreated: true}});
       } else {
         this.postActions.updatePost(this.selectedPost);
+        this.router.navigate(['home/posts']);
       }
-      this.router.navigate(['home/posts']);
     }
   }
 
@@ -125,7 +130,18 @@ export class NeweditpostComponent implements OnInit {
   }
 
   deletePostOnClick(): void {
-    this.postActions.deletePost(this.selectedPost);
-    this.router.navigate(['home/posts'], { state: { postDeleted: true } });
+    const confirmDialog = this.dialog.open(AlertBoxComponent, {
+      data: {
+        title: 'Confirm Delete Post',
+        message: 'Are you sure, you want to delete a post: ' + this.selectedPost.title,
+      }
+    });
+
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.postActions.deletePost(this.selectedPost);
+        this.router.navigate(['home/posts'], {state: {postDeleted: true}});
+      }
+    });
   }
 }
