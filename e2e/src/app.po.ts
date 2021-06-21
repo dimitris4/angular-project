@@ -9,11 +9,11 @@ export class AppPage {
     return element(by.css('app-root .content span')).getText();
   }
 
-  async navigateToPosts() {
-    await element(by.css(".e2e-posts")).click();
+  async navigateToPosts(): Promise<void> {
+    await element(by.css('.e2e-posts')).click();
   }
 
-  async clickNewPostButton() {
+  async clickNewPostButton(): Promise<void> {
     await element(by.id('newPostBtn')).click();
   }
 }
