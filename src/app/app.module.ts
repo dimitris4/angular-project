@@ -38,12 +38,20 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireStorage} from '@angular/fire/storage';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollectionsComponent } from './collections/components/collection-list/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import { NeweditcollectionComponent } from './collections/components/neweditcollection/neweditcollection.component';
+
+import { environment } from '../environments/environment';
+import { DropzoneDirective } from './dropzone.directive';
+import { UploaderComponent } from './uploader/uploader.component';
+import { UploadTaskComponent } from './upload-task/upload-task.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +68,10 @@ import { NeweditcollectionComponent } from './collections/components/neweditcoll
     HomepageComponent,
     DashboardComponent,
     ProfileComponent,
+    // CollectionsComponent,
+    DropzoneDirective,
+    UploaderComponent,
+    UploadTaskComponent
     CollectionsComponent,
     NeweditcollectionComponent,
   ],
@@ -73,11 +85,14 @@ import { NeweditcollectionComponent } from './collections/components/neweditcoll
         MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
         MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
         MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
-        AngularFireModule.initializeApp(undefined, undefined),
-        AngularFireDatabaseModule, MatRippleModule, MatRadioModule
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        MatRippleModule, MatRadioModule,
     ],
 
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
+  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, AngularFireStorage],
 
   bootstrap: [AppComponent]
 })
