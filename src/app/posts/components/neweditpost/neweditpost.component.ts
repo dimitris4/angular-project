@@ -29,7 +29,8 @@ export class NeweditpostComponent implements OnInit {
     private router: Router,
     private postActions: PostActions,
     private ngRedux: NgRedux<AppState>,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ) { }
 
   public selectedPost;

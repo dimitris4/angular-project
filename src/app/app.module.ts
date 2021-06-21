@@ -71,7 +71,7 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
     // CollectionsComponent,
     DropzoneDirective,
     UploaderComponent,
-    UploadTaskComponent
+    UploadTaskComponent,
     CollectionsComponent,
     NeweditcollectionComponent,
   ],
