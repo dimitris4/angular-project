@@ -78,11 +78,13 @@ export class NeweditpostComponent implements OnInit {
     this.selectedPost = this.postForm.value;
 
     const collaborationArray = [];
-    if (this.postForm.controls.collaborations.value.length > 0) {
-      for (const item of this.postForm.controls.collaborations.value) {
-        const newCollaboration = new Collaboration();
-        newCollaboration.email = item.email;
-        collaborationArray.push(newCollaboration);
+    if (this.postForm.controls.collaborations.value !== null) {
+      if (this.postForm.controls.collaborations.value.length > 0) {
+        for (const item of this.postForm.controls.collaborations.value) {
+          const newCollaboration = new Collaboration();
+          newCollaboration.email = item.email;
+          collaborationArray.push(newCollaboration);
+        }
       }
     }
     this.selectedPost.collaborations = collaborationArray;
