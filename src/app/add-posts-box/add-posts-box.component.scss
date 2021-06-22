@@ -1,0 +1,25 @@
+.wrapper{
+  display: grid;
+  width: 50rem;
+  height: 30rem;
+  grid-template-rows: 20% 70% 10%;
+}
+.body{
+  overflow: scroll;
+}
+table{
+  width: 100%;
+}
+.search-box{
+  width: 100%;
+}
+.footer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
+button{
+  width: 20%;
+  margin-right: 1.5em;
+}

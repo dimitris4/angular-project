@@ -17,7 +17,7 @@
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Title</mat-label>
-          <input id="input_title" matInput formControlName="title" id="e2e-new-collection-title">
+          <input id="input_title" matInput formControlName="title">
         </mat-form-field>
       </div>
 
@@ -26,7 +26,7 @@
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
-          <textarea id="input_text" matInput formControlName="description" id="e2e-new-post-text"></textarea>
+          <textarea id="input_text" matInput formControlName="description"></textarea>
         </mat-form-field>
       </div>
 
@@ -36,7 +36,7 @@
         <h4>Add content</h4>
         <p>You can add posts and/or events to your collections.</p>
 
-        <button mat-raised-button class="add-content-button" color="primary">
+        <button mat-raised-button class="add-content-button" color="primary" (click)="onClickAddPosts()">
             <span class="material-icons">view_list</span>
             <span>Posts</span>
         </button>
@@ -46,6 +46,18 @@
             <span>Events</span>
         </button>
       </div>
+
+      <!-- display list of selected posts with delete button -->
+      <ul *ngIf="selectedPosts">
+        <li *ngFor="let post of selectedPosts">
+          <div class="collections-list">
+            <span>{{post.title}}</span>
+            <a style="cursor: pointer" (click)="removePostOnClick(post.id)">
+              <span class="material-icons">delete_forever</span>
+            </a>
+          </div>
+        </li>
+      </ul>
 
       <br>
 
