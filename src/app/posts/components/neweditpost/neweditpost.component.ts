@@ -102,7 +102,6 @@ export class NeweditpostComponent implements OnInit {
     if (this.postForm.valid) {
       // creates new post
       if (!this.editMode) {
-        // this.selectedPost.id = String(Math.floor(Math.random() * 100));
         // add 'likes' property to the new post
         const likes = [];
         const testUser = new User();
