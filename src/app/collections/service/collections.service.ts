@@ -29,4 +29,20 @@ export class CollectionsService extends ApiService {
     const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/collections/${updatedCollection.id}.json?auth=${this.token}`;
     return this.http.patch(url, updatedCollection, this.getHttpOptions());
   }
+
+  getCollections(): Collection[] {
+    const result = [];
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/collections.json?auth=' + this.token;
+    this.http.get(url, this.getHttpOptions())
+      .subscribe(res => {
+        if (res) {
+          for (const [key, value] of Object.entries(res)) {
+            const item: any = value;
+            item.id = key;
+            result.push(item as Collection);
+          }
+        }
+      });
+    return result;
+  }
 }

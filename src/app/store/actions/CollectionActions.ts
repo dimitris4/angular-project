@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
-import { NgRedux } from '@angular-redux/store';
-import { AppState } from '../Store';
-import { Collection } from 'src/app/entities/Collection';
-import { CollectionsService } from '../../collections/service/collections.service';
+import {Injectable} from '@angular/core';
+import {NgRedux} from '@angular-redux/store';
+import {AppState} from '../Store';
+import {Collection} from 'src/app/entities/Collection';
+import {CollectionsService} from '../../collections/service/collections.service';
+import {PostsService} from '../../posts/service/posts.service';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({providedIn: 'root'})
 export class CollectionActions {
 
-  constructor(private ngRedux: NgRedux<AppState>, private collectionsService: CollectionsService) {}
+  constructor(
+    private ngRedux: NgRedux<AppState>,
+    private collectionsService: CollectionsService,
+    private postsService: PostsService
+  ) { }
 
   static ADD_COLLECTION = 'ADD_COLLECTION';
   static UPDATE_COLLECTION = 'UPDATE_COLLECTION';
@@ -25,7 +30,6 @@ export class CollectionActions {
             collections.push(item as Collection);
           }
         }
-        console.log(collections);
         this.ngRedux.dispatch({
           type: CollectionActions.READ_COLLECTIONS,
           payload: collections
@@ -36,12 +40,29 @@ export class CollectionActions {
   addCollection(newCollection: Collection): void {
     this.collectionsService.saveCollection(newCollection)
       .subscribe((result: any) => {
-        // newPost.id = result.name;
-        this.ngRedux.dispatch({
-          type: CollectionActions.ADD_COLLECTION,
-          payload: newCollection
+          // save collection id
+          newCollection.id = result.name;
+          this.collectionsService.updateCollection(newCollection).subscribe();
+          // update each post in the collection
+          const postsInCollection = newCollection.posts;
+          postsInCollection.forEach(post => {
+            if (!post.collections) {
+              post.collections = [];
+            }
+            // create custom object to prevent circular call
+            post.collections.push(
+              {
+                id: newCollection.id,
+                title: newCollection.title,
+              });
+            this.postsService.updatePost(post).subscribe();
+          });
+          // update redux
+          this.ngRedux.dispatch({
+            type: CollectionActions.ADD_COLLECTION,
+            payload: newCollection
+          });
         });
-      });
   }
 
   updateCollection(updatedCollection: Collection): void {
@@ -55,7 +76,6 @@ export class CollectionActions {
   }
 
   deleteCollection(updatedCollection: Collection): void {
-    console.log('inside the action', updatedCollection);
     this.ngRedux.dispatch({
       type: CollectionActions.DELETE_COLLECTION,
       payload: updatedCollection

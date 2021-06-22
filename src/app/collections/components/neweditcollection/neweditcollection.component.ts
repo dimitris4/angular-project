@@ -9,7 +9,6 @@ import {AppState} from '../../../store/Store';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Collection} from '../../../entities/Collection';
-import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
 import {AddPostsBoxComponent} from '../../../add-posts-box/add-posts-box.component';
 import {PostActions} from '../../../store/actions/PostActions';
 import {Post} from '../../../entities/Post';
@@ -63,6 +62,7 @@ export class NeweditcollectionComponent implements OnInit {
       description: [this.selectedCollection.description],
       posts: [this.selectedCollection.posts],
       pinned: [this.selectedCollection.pinned],
+      id: [this.selectedCollection.id],
     });
     this.postActions.readPosts();
     this.ngRedux.select(appState => appState.posts).subscribe(async res => {
@@ -71,7 +71,22 @@ export class NeweditcollectionComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('on submit', this.collectionForm.value);
+    if (this.collectionForm.valid) {
+      if (!this.editMode) {
+        // create new collection
+        const newCollection = new Collection();
+        newCollection.title = this.collectionForm.value.title;
+        newCollection.description = this.collectionForm.value.description;
+        newCollection.posts = this.selectedPosts;
+        newCollection.createdDate = new Date();
+        newCollection.pinned = this.collectionForm.value.pinned;
+        console.log('save new collection = ', newCollection);
+        this.collectionActions.addCollection(newCollection);
+        this.router.navigate(['home/collections'], {state: {collectionCreated: true}});
+      } else {
+        // update collection
+      }
+    }
     // Object.assign(this.selectedCollection, this.collectionForm.value);
     // const loggedInUser = JSON.parse(localStorage.getItem('user'));
     // if (this.collectionForm.valid) {
@@ -103,11 +118,10 @@ export class NeweditcollectionComponent implements OnInit {
   // }
 
   changeStatusDraft(): void {
-    console.log('change status to draft');
   }
 
   changeStatusPublished(): void {
-    console.log('change status to published');
+    this.onSubmit();
   }
 
   onClickAddPosts(): void {
@@ -125,8 +139,10 @@ export class NeweditcollectionComponent implements OnInit {
   }
 
   removePostOnClick(id: string): void {
-    console.log('posts = ', this.selectedPosts);
-    console.log('id = ', id);
     this.selectedPosts = this.selectedPosts.filter(post => post.id !== id);
+  }
+
+  deleteCollectionOnClick(): void {
+    return;
   }
 }

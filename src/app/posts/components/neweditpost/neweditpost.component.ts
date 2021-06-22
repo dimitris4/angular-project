@@ -13,6 +13,7 @@ import {Collaboration} from '../../../entities/Collaboration';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
+import {CollectionsService} from '../../../collections/service/collections.service';
 
 @Component({
   selector: 'app-neweditpost',
@@ -28,16 +29,13 @@ export class NeweditpostComponent implements OnInit {
   public organisationList: User[];
   public selectedFile: File = null;
   // replace dummy data with API call in the future
-  public availableCollections: Collection[] = [
-    {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
+  public availableCollections: Collection[];
 
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
     private authService: AuthService,
+    private collectionsService: CollectionsService,
     private fb: FormBuilder,
     private router: Router,
     private postActions: PostActions,
@@ -78,6 +76,7 @@ export class NeweditpostComponent implements OnInit {
     });
     // calls directly the service
     this.organisationList = this.authService.getOrganisations();
+    this.availableCollections = this.collectionsService.getCollections();
   }
 
   onSubmit(): void {

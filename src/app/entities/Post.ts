@@ -1,13 +1,13 @@
 import {Collaboration} from './Collaboration';
-
 import { User } from 'src/app/entities/User';
+
 export class Post {
   id?: string;
   createdDate: Date;
   title: string;
   text: string;
   media?: string;
-  collections?: Array<string>;
+  collections?: Array<any>;
   comments?: Array<Comment>;
   status: string;
   collaborations?: Collaboration[];
