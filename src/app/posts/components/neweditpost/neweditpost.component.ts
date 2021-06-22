@@ -20,6 +20,19 @@ import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
   styleUrls: ['./neweditpost.component.scss']
 })
 export class NeweditpostComponent implements OnInit {
+  public selectedPost: Post;
+  public postForm: FormGroup;
+  public title: string;
+  public editMode: boolean;
+  public published: boolean;
+  public organisationList: User[];
+  public selectedFile: File = null;
+  // replace dummy data with API call in the future
+  public availableCollections: Collection[] = [
+    {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
+    {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,22 +46,8 @@ export class NeweditpostComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  public selectedPost;
-  public postForm: FormGroup;
-  public title: string;
-  public editMode: boolean;
-  public published: boolean;
-  public organisationList: User[];
-  // replace dummy data with API call in the future
-  public availableCollections: Collection[] = [
-    {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
-
-  public selectedFile: File = null;
-
   ngOnInit(): void {
+    this.selectedPost = JSON.parse(localStorage.getItem('currentPost'));
     this.route.paramMap
       .subscribe(params => {
         if (params.get('id') === 'create') {
@@ -58,7 +57,10 @@ export class NeweditpostComponent implements OnInit {
         } else {
           const id = params.get('id');
           this.ngRedux.select(state => state.posts).subscribe(res => {
-            this.selectedPost = res.posts.find(post => post.id === id);
+            if (res.posts.length !== 0) {
+              this.selectedPost = res.posts.find(post => post.id === id);
+              localStorage.setItem('currentPost', JSON.stringify(this.selectedPost));
+            }
           });
           this.title = 'Edit post';
           this.editMode = true;
