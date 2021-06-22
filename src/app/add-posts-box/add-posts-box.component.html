@@ -1,9 +1,10 @@
 <div class="wrapper">
+
   <div class="header">
-    <h3>{{data.title}}</h3>
-    <div class="search-posts">
-      <input class="search-box"/>
-    </div>
+    <h3 style="margin:0; margin-bottom: 0.8em">{{data.title}}</h3>
+    <mat-form-field style="width: 100%; font-size: 1em;">
+      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter by title">
+    </mat-form-field>
   </div>
 
   <div class="body">

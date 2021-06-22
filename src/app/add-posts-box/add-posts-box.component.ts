@@ -27,6 +27,10 @@ export class AddPostsBoxComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  applyFilter(filterValue: string): any {
+    this.posts.filter = filterValue.trim().toLowerCase();
+  }
+
   onClickAddPosts(): void {
   }
 
