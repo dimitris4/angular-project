@@ -102,13 +102,13 @@ export class NeweditcollectionComponent implements OnInit {
   //   });
   // }
 
-  // changeStatusDraft(): void {
-  //   console.log('change status to draft');
-  // }
-  //
-  // changeStatusPublished(): void {
-  //   console.log('change status to published');
-  // }
+  changeStatusDraft(): void {
+    console.log('change status to draft');
+  }
+
+  changeStatusPublished(): void {
+    console.log('change status to published');
+  }
 
   onClickAddPosts(): void {
     const dialogConfig = new MatDialogConfig();
