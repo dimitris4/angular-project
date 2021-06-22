@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray, ValidatorFn } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from './_helpers/must-match.validator';
 import {Router} from '@angular/router';
 import {UserActions} from '../store/actions/UserActions';
 import { NgRedux } from '@angular-redux/store';
 import {AppState} from '../store/Store';
-import {ServerError} from '../entities/ServerError';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
