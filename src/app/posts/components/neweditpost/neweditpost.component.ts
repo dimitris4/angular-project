@@ -45,7 +45,6 @@ export class NeweditpostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectedPost = JSON.parse(localStorage.getItem('currentPost'));
     this.route.paramMap
       .subscribe(params => {
         if (params.get('id') === 'create') {
@@ -58,6 +57,8 @@ export class NeweditpostComponent implements OnInit {
             if (res.posts.length !== 0) {
               this.selectedPost = res.posts.find(post => post.id === id);
               localStorage.setItem('currentPost', JSON.stringify(this.selectedPost));
+            } else {
+              this.selectedPost = JSON.parse(localStorage.getItem('currentPost'));
             }
           });
           this.title = 'Edit post';
