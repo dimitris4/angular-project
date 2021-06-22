@@ -10,7 +10,7 @@
 
   <div *ngIf="downloadURL as url">
     <h3>File Preview</h3>
-    <div style="height: 200px; width: 200px;">
+    <div style="height: 200px; width: 200px; margin-bottom: 0.7em;">
       <img style="max-height: 100%" [src]="url" alt="media"><br>
     </div>
     <a [href]="url" target="_blank" rel="noopener">Download</a>
