@@ -12,13 +12,13 @@
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
+      <!-- Title Column -->
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef><b>Title</b></th>
         <td mat-cell id="e2e-post-title" *matCellDef="let post"> {{ post.title }} </td>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Date Created Column -->
       <ng-container matColumnDef="createdDate">
         <th mat-header-cell *matHeaderCellDef><b>Created</b></th>
         <td mat-cell *matCellDef="let post"> {{ post.createdDate | date: 'd MMM, y' }} </td>
@@ -29,11 +29,11 @@
         <td mat-cell *matCellDef="let post" class="table-column">
           <div style="display: flex; justify-content: start">
             <div style="margin-right: 2.5em; position: relative;">
-              <span class="material-icons thumbnail-icon">thumb_up</span>
-              <span style="position: absolute; bottom: 2px; margin-left: 3px;">{{ post.likes.length }}</span>
+              <span class="material-icons thumbnail-icon" style="font-size: 1.2em">thumb_up</span>
+              <span style="position: absolute; bottom: 2px; margin-left: 3px;">{{post.likes.length}}</span>
             </div>
             <div style="position: relative;">
-              <span class="material-icons comment-icon thumbnail-icon">comment</span>
+              <span class="material-icons comment-icon thumbnail-icon" style="font-size: 1.2em">comment</span>
               <span style="position: absolute; bottom: 2px; margin-left: 3px;">1</span>
             </div>
           </div>
@@ -48,13 +48,13 @@
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? masterToggle() : null"
+          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
                         [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()"
+          <mat-checkbox color="primary" (click)="$event.stopPropagation()"
                         (change)="$event ? selection.toggle(row) : null"
                         [checked]="selection.isSelected(row)">
           </mat-checkbox>

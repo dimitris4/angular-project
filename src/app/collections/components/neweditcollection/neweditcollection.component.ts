@@ -114,7 +114,7 @@ export class NeweditcollectionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.data = {
-      title: 'Add Post(s)',
+      title: 'Add post(s)',
       posts: this.posts,
       selectedPosts: this.selectedPosts
     };

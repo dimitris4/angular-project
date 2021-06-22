@@ -1,12 +1,12 @@
 <div class="container-main">
 
   <div class="back-button">
-    <a class="back-button"  [routerLink]="'/home/collections'">< Back</a>
+    <a class="back-button" [routerLink]="'/home/collections'">< Back</a>
   </div>
 
   <div class="form">
 
-    <form [formGroup]="collectionForm" id="form" >
+    <form [formGroup]="collectionForm" id="form">
 
       <div class="flexHeader">
         <h3>{{ title }}</h3>
@@ -14,41 +14,35 @@
 
       <br>
 
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Title</mat-label>
-          <input id="input_title" matInput formControlName="title">
-        </mat-form-field>
-      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input id="input_title" matInput formControlName="title">
+      </mat-form-field>
 
       <br>
 
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea id="input_text" matInput formControlName="description"></textarea>
-        </mat-form-field>
-      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea id="input_text" matInput formControlName="description"></textarea>
+      </mat-form-field>
 
       <br>
 
-      <div>
-        <h4>Add content</h4>
-        <p>You can add posts and/or events to your collections.</p>
+      <h4>Add content</h4>
+      <p>You can add posts and/or events to your collections.</p>
 
-        <button mat-raised-button class="add-content-button" color="primary" (click)="onClickAddPosts()">
-            <span class="material-icons">view_list</span>
-            <span>Posts</span>
-        </button>
+      <button mat-raised-button class="add-content-button" color="primary" (click)="onClickAddPosts()">
+        <span class="material-icons">view_list</span>
+        <span>Posts</span>
+      </button>
 
-        <button mat-raised-button class="add-content-button" color="primary">
-            <mat-icon>event</mat-icon>
-            <span>Events</span>
-        </button>
-      </div>
+      <button mat-raised-button class="add-content-button" color="primary">
+        <mat-icon>event</mat-icon>
+        <span>Events</span>
+      </button>
 
       <!-- display list of selected posts with delete button -->
-      <ul *ngIf="selectedPosts">
+      <ul *ngIf="selectedPosts" style="margin-top: 1.5em">
         <li *ngFor="let post of selectedPosts">
           <div class="collections-list">
             <span>{{post.title}}</span>
@@ -59,14 +53,10 @@
         </li>
       </ul>
 
-      <br>
-
       <!-- pinned -->
-      <div>
-        <h4>Pinned</h4>
-        <p>You can pin this collection to the top of the page.</p>
-        <mat-slide-toggle formControlName="pinned"></mat-slide-toggle>
-      </div>
+      <h4>Pinned</h4>
+      <p>You can pin this collection to the top of the page.</p>
+      <mat-slide-toggle formControlName="pinned"></mat-slide-toggle>
 
       <br>
       <hr>
@@ -75,7 +65,7 @@
       <!-- submit buttons-->
       <div class="button-container">
         <!--        save draft-->
-        <button class="submit-button white-button" (click)="changeStatusDraft()"  mat-raised-button color="primary">
+        <button class="submit-button white-button" (click)="changeStatusDraft()" mat-raised-button color="primary">
           <div class="inside-button-container">
             <span>Save draft</span>
             <span class="material-icons small-icon">save</span>
@@ -83,7 +73,8 @@
         </button>
 
         <!--        publish (show different text in edit mode) -->
-        <button class="submit-button green-button" (click)="changeStatusPublished()" mat-raised-button color="primary" id="submit_button">
+        <button class="submit-button green-button" (click)="changeStatusPublished()" mat-raised-button color="primary"
+                id="submit_button">
           <div class="inside-button-container">
             <div *ngIf="editMode; else elseBlock">Publish collection / save changes</div>
             <ng-template #elseBlock>Publish collection</ng-template>
@@ -92,7 +83,8 @@
         </button>
 
         <!--        delete (show only in edit mode) -->
-        <button *ngIf="editMode" class="submit-button white-button" (click)="deleteCollectionOnClick()" mat-raised-button color="primary" id="delete_button">
+        <button *ngIf="editMode" class="submit-button white-button" (click)="deleteCollectionOnClick()"
+                mat-raised-button color="primary" id="delete_button">
           <div class="inside-button-container">
             <span>Delete post</span>
           </div>
