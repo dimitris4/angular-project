@@ -44,6 +44,7 @@ describe('Posts section', () => {
     for (let i = 0; i < n; i++) {
       await element.all(by.id('e2e-edit-post-button')).get(postsBeforeDeleting - i - 1).click();
       await element(by.id('delete_button')).click();
+      await element(by.id('e2e-confirm-delete')).click();
       await browser.sleep(1000);
       postsAfterDeleting = await (await element.all(by.id('e2e-post-title'))).length;
     }
