@@ -12,7 +12,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Injectable({ providedIn: 'root'})
 export class UserActions {
 
-  static SIGNED_UP = 'SIGNED_UP';
+  static SIGN_UP = 'SIGN_UP';
   static LOG_IN = 'LOG_IN';
 
   public errorMessage;
@@ -43,7 +43,7 @@ export class UserActions {
         this.authService.saveUserInfo(user, res.idToken).subscribe();
 
         this.ngRedux.dispatch({
-          type: UserActions.SIGNED_UP,
+          type: UserActions.SIGN_UP,
           payload: {user, token: res.idToken, authError: this.errorMessage}
         });
         this.errorActions.addError({message: ''});

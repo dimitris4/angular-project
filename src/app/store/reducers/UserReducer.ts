@@ -7,7 +7,7 @@ const INITIAL_STATE: UserState = {loggedInUser: undefined, token: 'empty'};
 
 export function usersReducer(state: UserState = INITIAL_STATE, action: any): UserState {
   switch (action.type) {
-    case UserActions.SIGNED_UP:
+    case UserActions.SIGN_UP:
       return tassign(state, {
         loggedInUser: action.payload.user,
         token: action.payload.token
