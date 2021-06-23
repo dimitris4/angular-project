@@ -7,10 +7,11 @@ import {CollectionActions} from '../../../store/actions/CollectionActions';
 import {NgRedux} from '@angular-redux/store';
 import {AppState} from '../../../store/Store';
 import {HttpClient, HttpEventType} from '@angular/common/http';
-import {MatDialog} from '@angular/material/dialog';
-import {User} from '../../../entities/User';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Collection} from '../../../entities/Collection';
-import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
+import {AddPostsBoxComponent} from '../../../add-posts-box/add-posts-box.component';
+import {PostActions} from '../../../store/actions/PostActions';
+import {Post} from '../../../entities/Post';
 
 @Component({
   selector: 'app-neweditcollection',
@@ -23,8 +24,8 @@ export class NeweditcollectionComponent implements OnInit {
   public title: string;
   public editMode: boolean;
   public published: boolean;
-  public organisationList: User[];
-  public selectedFile: File = null;
+  public posts: Post[];
+  public selectedPosts: Post[];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +36,10 @@ export class NeweditcollectionComponent implements OnInit {
     private collectionActions: CollectionActions,
     private ngRedux: NgRedux<AppState>,
     private http: HttpClient,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private postActions: PostActions,
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap
@@ -59,45 +62,87 @@ export class NeweditcollectionComponent implements OnInit {
       description: [this.selectedCollection.description],
       posts: [this.selectedCollection.posts],
       pinned: [this.selectedCollection.pinned],
+      id: [this.selectedCollection.id],
+    });
+    this.postActions.readPosts();
+    this.ngRedux.select(appState => appState.posts).subscribe(async res => {
+      this.posts = res.posts;
     });
   }
 
   onSubmit(): void {
-    Object.assign(this.selectedCollection, this.collectionForm.value);
-    const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (this.collectionForm.valid) {
-      // creates new collection
       if (!this.editMode) {
-        this.collectionActions.addCollection(this.selectedCollection);
+        // create new collection
+        const newCollection = new Collection();
+        newCollection.title = this.collectionForm.value.title;
+        newCollection.description = this.collectionForm.value.description;
+        newCollection.posts = this.selectedPosts;
+        newCollection.createdDate = new Date();
+        newCollection.pinned = this.collectionForm.value.pinned;
+        console.log('save new collection = ', newCollection);
+        this.collectionActions.addCollection(newCollection);
         this.router.navigate(['home/collections'], {state: {collectionCreated: true}});
       } else {
-        this.collectionActions.updateCollection(this.selectedCollection);
-        this.router.navigate(['home/collections']);
+        // update collection
       }
     }
+    // Object.assign(this.selectedCollection, this.collectionForm.value);
+    // const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    // if (this.collectionForm.valid) {
+    //   // creates new collection
+    //   if (!this.editMode) {
+    //     this.collectionActions.addCollection(this.selectedCollection);
+    //     this.router.navigate(['home/collections'], {state: {collectionCreated: true}});
+    //   } else {
+    //     this.collectionActions.updateCollection(this.selectedCollection);
+    //     this.router.navigate(['home/collections']);
+    //   }
+    // }
   }
 
-  deleteCollectionOnClick(): void {
-    const confirmDialog = this.dialog.open(AlertBoxComponent, {
-      data: {
-        title: 'Confirm Delete Collection',
-        message: 'Are you sure, you want to delete a collection: ' + this.selectedCollection.title,
-      }
-    });
-
-    confirmDialog.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.collectionActions.deleteCollection(this.selectedCollection);
-        this.router.navigate(['home/collections'], {state: {collectionDeleted: true}});
-      }
-    });
-  }
+  // deleteCollectionOnClick(): void {
+  //   const confirmDialog = this.dialog.open(AlertBoxComponent, {
+  //     data: {
+  //       title: 'Confirm Delete Collection',
+  //       message: 'Are you sure, you want to delete a collection: ' + this.selectedCollection.title,
+  //     }
+  //   });
+  //
+  //   confirmDialog.afterClosed().subscribe(result => {
+  //     if (result === true) {
+  //       this.collectionActions.deleteCollection(this.selectedCollection);
+  //       this.router.navigate(['home/collections'], {state: {collectionDeleted: true}});
+  //     }
+  //   });
+  // }
 
   changeStatusDraft(): void {
-    console.log('change status to draft');
   }
 
   changeStatusPublished(): void {
-    console.log('change status to published');
+    this.onSubmit();
+  }
+
+  onClickAddPosts(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      title: 'Add post(s)',
+      posts: this.posts,
+      selectedPosts: this.selectedPosts
+    };
+    const dialogRef = this.dialog.open(AddPostsBoxComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => this.selectedPosts = data
+    );
+  }
+
+  removePostOnClick(id: string): void {
+    this.selectedPosts = this.selectedPosts.filter(post => post.id !== id);
+  }
+
+  deleteCollectionOnClick(): void {
+    return;
   }
 }

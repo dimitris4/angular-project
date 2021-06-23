@@ -23,5 +23,4 @@ export class SecureInnerPagesGuard implements CanActivate {
     }
     return true;
   }
-
 }

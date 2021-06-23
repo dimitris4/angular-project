@@ -1,9 +1,8 @@
-import { tassign } from 'tassign';
-import { PostState } from '../Store';
-import { PostActions } from '../actions/PostActions';
-import { Post } from 'src/app/entities/Post';
+import {tassign} from 'tassign';
+import {PostState} from '../Store';
+import {PostActions} from '../actions/PostActions';
 
-const INITIAL_STATE: PostState = { posts: [] };
+const INITIAL_STATE: PostState = {posts: []};
 
 export function postsReducer(state: PostState = INITIAL_STATE, action: any): PostState {
   switch (action.type) {
@@ -15,11 +14,10 @@ export function postsReducer(state: PostState = INITIAL_STATE, action: any): Pos
       newArray[index] = action.payload;
       return tassign(state, {posts: newArray});
     case PostActions.ADD_POST:
-      // return tassign(state, {posts: state.posts.concat(action.payload)});
       return tassign(state, {posts: [...state.posts, action.payload]});
     case PostActions.DELETE_POST:
-      return { posts: state.posts.filter(post => post.id !== action.payload.id) };
+      return {posts: state.posts.filter(post => post.id !== action.payload.id)};
     default:
       return state;
- }
+  }
 }

@@ -3,11 +3,18 @@ import { NgRedux } from '@angular-redux/store';
 import { AppState } from '../Store';
 import { Post } from 'src/app/entities/Post';
 import {PostsService} from '../../posts/service/posts.service';
+import {ErrorActions} from './ErrorActions';
+import {Router} from '@angular/router';
 
 @Injectable({ providedIn: 'root'})
 export class PostActions {
 
-  constructor(private ngRedux: NgRedux<AppState>, private postService: PostsService) {}
+  constructor(
+    private ngRedux: NgRedux<AppState>,
+    private postService: PostsService,
+    private errorActions: ErrorActions,
+    private router: Router,
+  ) {}
 
   static ADD_POST = 'ADD_POST';
   static UPDATE_POST = 'UPDATE_POST';
@@ -25,7 +32,6 @@ export class PostActions {
           posts.push(item as Post);
         }
       }
-      console.log(posts);
       this.ngRedux.dispatch({
         type: PostActions.READ_POSTS,
         payload: posts

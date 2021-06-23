@@ -52,6 +52,7 @@ import { environment } from '../environments/environment';
 import { DropzoneDirective } from './dropzone.directive';
 import { UploaderComponent } from './uploader/uploader.component';
 import { UploadTaskComponent } from './upload-task/upload-task.component';
+import { AddPostsBoxComponent } from './add-posts-box/add-posts-box.component';
 
 @NgModule({
   declarations: [
@@ -68,29 +69,29 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
     HomepageComponent,
     DashboardComponent,
     ProfileComponent,
-    // CollectionsComponent,
     DropzoneDirective,
     UploaderComponent,
     UploadTaskComponent,
     CollectionsComponent,
     NeweditcollectionComponent,
+    AddPostsBoxComponent,
   ],
-    imports: [
-        BrowserModule,
-        NgReduxModule,
-        NgReduxRouterModule.forRoot(),
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-        MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
-        MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        MatRippleModule, MatRadioModule,
-    ],
+  imports: [
+    BrowserModule,
+    NgReduxModule,
+    NgReduxRouterModule.forRoot(),
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
+    MatInputModule, MatDialogModule, MatTableModule, HttpClientModule, MatFormFieldModule, MatSelectModule, MatSlideToggleModule,
+    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    MatRippleModule, MatRadioModule,
+  ],
 
   providers: [AuthService, AuthGuard, SecureInnerPagesGuard, AngularFireStorage, AngularFirestore, UploadTaskComponent],
 

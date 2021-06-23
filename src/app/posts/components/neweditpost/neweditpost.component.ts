@@ -13,6 +13,7 @@ import {Collaboration} from '../../../entities/Collaboration';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
+import {CollectionsService} from '../../../collections/service/collections.service';
 import {UploadTaskComponent} from '../../../upload-task/upload-task.component';
 
 @Component({
@@ -21,11 +22,21 @@ import {UploadTaskComponent} from '../../../upload-task/upload-task.component';
   styleUrls: ['./neweditpost.component.scss']
 })
 export class NeweditpostComponent implements OnInit {
+  public selectedPost: Post;
+  public postForm: FormGroup;
+  public title: string;
+  public editMode: boolean;
+  public published: boolean;
+  public organisationList: User[];
+  public selectedFile: File = null;
+  // replace dummy data with API call in the future
+  public availableCollections: Collection[];
 
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
     private authService: AuthService,
+    private collectionsService: CollectionsService,
     private fb: FormBuilder,
     private router: Router,
     private postActions: PostActions,
@@ -34,20 +45,6 @@ export class NeweditpostComponent implements OnInit {
     private dialog: MatDialog,
     private uploadTask: UploadTaskComponent
   ) { }
-
-  public selectedPost;
-  public postForm: FormGroup;
-  public title: string;
-  public editMode: boolean;
-  public published: boolean;
-  public organisationList: User[];
-  public downloadURL: string;
-  // replace dummy data with API call in the future
-  public availableCollections: Collection[] = [
-    {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
-    {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
 
   ngOnInit(): void {
     this.route.paramMap
@@ -59,7 +56,12 @@ export class NeweditpostComponent implements OnInit {
         } else {
           const id = params.get('id');
           this.ngRedux.select(state => state.posts).subscribe(res => {
-            this.selectedPost = res.posts.find(post => post.id === id);
+            if (res.posts.length !== 0) {
+              this.selectedPost = res.posts.find(post => post.id === id);
+              localStorage.setItem('currentPost', JSON.stringify(this.selectedPost));
+            } else {
+              this.selectedPost = JSON.parse(localStorage.getItem('currentPost'));
+            }
           });
           this.title = 'Edit post';
           this.editMode = true;
@@ -78,7 +80,7 @@ export class NeweditpostComponent implements OnInit {
     });
     // calls directly the service
     this.organisationList = this.authService.getOrganisations();
-    console.log(this.selectedPost);
+    this.availableCollections = this.collectionsService.getCollections();
   }
 
   onSubmit(): void {
@@ -103,7 +105,6 @@ export class NeweditpostComponent implements OnInit {
     if (this.postForm.valid) {
       // creates new post
       if (!this.editMode) {
-        // this.selectedPost.id = String(Math.floor(Math.random() * 100));
         // add 'likes' property to the new post
         const likes = [];
         const testUser = new User();
