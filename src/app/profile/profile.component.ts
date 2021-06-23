@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../auth.service';
+import {User} from '../entities/User';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  public userInfo: User;
+  public hasDataLoaded = false;
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService) {
   }
 
+  ngOnInit(): void {
+    this.authService.getLoggedInUserInfo().subscribe(res => {
+      if (res) {
+        for (const [key, value] of Object.entries(res)) {
+          const userId = JSON.parse(localStorage.getItem('user')).id;
+          const user = value as User;
+          if (user.id === userId) {
+            this.userInfo = user;
+            this.hasDataLoaded = true;
+          }
+        }
+      }
+    });
+  }
 }

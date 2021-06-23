@@ -1,9 +1,9 @@
-import { NgRedux } from '@angular-redux/store';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
-import { AppState } from './store/Store';
-import { Router } from '@angular/router';
-import { ApiService } from './api.service';
+import {NgRedux} from '@angular-redux/store';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable, NgZone} from '@angular/core';
+import {AppState} from './store/Store';
+import {Router} from '@angular/router';
+import {ApiService} from './api.service';
 import {User} from './entities/User';
 import {Post} from './entities/Post';
 
@@ -64,5 +64,10 @@ export class AuthService extends ApiService {
         }
       });
     return result;
+  }
+
+  getLoggedInUserInfo(): any {
+    const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/users.json?auth=' + this.token;
+    return this.http.get(url, this.getHttpOptions());
   }
 }
