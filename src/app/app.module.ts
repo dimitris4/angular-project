@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
@@ -41,19 +40,18 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireStorage} from '@angular/fire/storage';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileComponent } from './profile/profile.component';
-import { CollectionsComponent } from './collections/components/collection-list/collections.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ProfileComponent} from './profile/profile.component';
+import {CollectionsComponent} from './collections/components/collection-list/collections.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {NeweditcollectionComponent} from './collections/components/neweditcollection/neweditcollection.component';
-
-
-import { environment } from '../environments/environment';
-import { DropzoneDirective } from './dropzone.directive';
-import { UploaderComponent } from './uploader/uploader.component';
-import { UploadTaskComponent } from './upload-task/upload-task.component';
-import { AddPostsBoxComponent } from './add-posts-box/add-posts-box.component';
+import {environment} from '../environments/environment';
+import {DropzoneDirective} from './dropzone.directive';
+import {UploaderComponent} from './uploader/uploader.component';
+import {UploadTaskComponent} from './upload-task/upload-task.component';
+import {AddPostsBoxComponent} from './add-posts-box/add-posts-box.component';
+import {PageNotFoundComponentComponent} from './page-not-found-component/page-not-found-component.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +74,7 @@ import { AddPostsBoxComponent } from './add-posts-box/add-posts-box.component';
     CollectionsComponent,
     NeweditcollectionComponent,
     AddPostsBoxComponent,
+    PageNotFoundComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +100,7 @@ import { AddPostsBoxComponent } from './add-posts-box/add-posts-box.component';
 export class AppModule {
   constructor(private ngRedux: NgRedux<AppState>,
               private devTool: DevToolsExtension,
-              private ngReduxRouter: NgReduxRouter, ) {
+              private ngReduxRouter: NgReduxRouter) {
     this.ngRedux.configureStore(rootReducer, {}, [], [devTool.isEnabled() ? devTool.enhancer() : f => f]);
     ngReduxRouter.initialize(/* args */);
   }

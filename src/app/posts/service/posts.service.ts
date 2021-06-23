@@ -9,7 +9,6 @@ import {Post} from '../../entities/Post';
 })
 export class PostsService extends ApiService {
 
-
   private token = localStorage.getItem('token');
 
   constructor(private http: HttpClient) {

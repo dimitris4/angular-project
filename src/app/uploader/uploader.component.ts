@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-uploader',
@@ -8,10 +8,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class UploaderComponent implements OnInit {
 
   @Output() downloadURL: EventEmitter<string> = new EventEmitter();
+  public isHovering: boolean;
+  public files: File[] = [];
 
-  isHovering: boolean;
-
-  files: File[] = [];
+  constructor() {
+  }
 
   toggleHover(event): void {
     this.isHovering = event;
@@ -31,9 +32,6 @@ export class UploaderComponent implements OnInit {
     this.downloadURL.emit(downloadURL);
   }
 
-  constructor() { }
-
   ngOnInit(): void {
   }
-
 }

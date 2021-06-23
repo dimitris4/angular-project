@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {User} from '../entities/User';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -12,19 +12,11 @@ export class ProfileComponent implements OnInit {
 
   public userInfo: User;
   public hasDataLoaded = false;
-
-  constructor(
-    private authService: AuthService,
-    private fb: FormBuilder) {
-  }
-
   public profile;
-  // public descriptionBlocks = [{header: '', body: ''}];
   public header;
   public body;
   public email;
   public contact;
-
   public profileForm = this.fb.group({
     header: '',
     body: '',
@@ -32,6 +24,10 @@ export class ProfileComponent implements OnInit {
     contact: ''
   });
 
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.authService.getLoggedInUserInfo().subscribe(res => {
@@ -44,7 +40,6 @@ export class ProfileComponent implements OnInit {
             console.log(this.userInfo);
             localStorage.setItem('userId', key);
             this.hasDataLoaded = true;
-
             this.profileForm = this.fb.group({
               header: [this.userInfo.header],
               body: [this.userInfo.body],
@@ -55,22 +50,10 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
-
   }
 
   onSubmit(): void {
     Object.assign(this.userInfo, this.profileForm.value);
-    console.log(this.profileForm.value);
-    this.authService.updateUserInfo(this.userInfo).subscribe(res => {
-      console.log(res);
-    });
+    this.authService.updateUserInfo(this.userInfo).subscribe();
   }
-
-  // addDescriptionBlock(): void {
-  //   this.descriptionBlocks.push({header: '', body: ''});
-  // }
-  //
-  // removeDescriptionBlock(): void {
-  //   this.descriptionBlocks.pop(); // not the last one always
-  // }
 }

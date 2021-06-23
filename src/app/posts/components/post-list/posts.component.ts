@@ -40,15 +40,13 @@ export class PostsComponent implements OnInit {
   }
 
   onClickLikePost(post: Post): void {
-    this.ngRedux.select(appState => appState.users).subscribe(res => {
-      if (this.isPostLiked(post)) {
-        post.likes = post.likes.filter(user => user.email !== this.loggedInUser.email);
-        this.postActions.updatePost(post);
-        return;
-      }
-      post.likes.push(this.loggedInUser);
+    if (this.isPostLiked(post)) {
+      post.likes = post.likes.filter(user => user.email !== this.loggedInUser.email);
       this.postActions.updatePost(post);
-    });
+      return;
+    }
+    post.likes.push(this.loggedInUser);
+    this.postActions.updatePost(post);
   }
 
   isPostLiked(post): boolean {

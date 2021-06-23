@@ -13,6 +13,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfileComponent} from './profile/profile.component';
 import {CollectionsComponent} from './collections/components/collection-list/collections.component';
 import {NeweditcollectionComponent} from './collections/components/neweditcollection/neweditcollection.component';
+import {PageNotFoundComponentComponent} from './page-not-found-component/page-not-found-component.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home/posts', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'collections', component: CollectionsComponent },
       { path: 'collections/:id', component: NeweditcollectionComponent },
       ]
-  }
+  },
+  { path: '**', component: PageNotFoundComponentComponent },
 ];
 
 @NgModule({

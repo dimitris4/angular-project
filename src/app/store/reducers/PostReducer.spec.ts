@@ -15,12 +15,10 @@ describe('posts reducer', () => {
     // Arrange
     const oldState = { posts: [] };
     const newPost = {
-      id: '123',
       createdDate: new Date(2021, 1, 2),
-      title: 'Is there life out there',
-      text: 'Something',
-      collections: [],
-      status: 'PUBLISHED'
+      title: 'New Post Title',
+      text: 'Text here...',
+      status: 'PUBLISHED',
     };
     deepFreeze(oldState);
     // const actionObj = { type: types.PostActions.ADD_POST, payload: newPost };
@@ -59,12 +57,20 @@ describe('posts reducer', () => {
   });
 
   it('update a post in the posts array', () => {
-    const oldState = { posts: [] };
-    const updatedPost: Post = {
+    const originalPost: Post = {
       id: '1',
       createdDate: new Date(2021, 1, 5),
       title: 'Is there life out there',
-      text: 'Something1',
+      text: 'Something',
+      collections: [],
+      status: 'PUBLISHED'
+    };
+    const oldState = { posts: [originalPost] };
+    const updatedPost: Post = {
+      id: '1',
+      createdDate: new Date(2021, 1, 5),
+      title: 'New title',
+      text: 'Something else',
       collections: [],
       status: 'PUBLISHED'
     };
@@ -78,19 +84,24 @@ describe('posts reducer', () => {
     const post = result.posts.find(x => x.id === updatedPost.id);
     // Assert (expect)
     console.log(result.posts.find(x => x.id === updatedPost.id));
-    expect(post.text).toEqual('Something1');
+    expect(post.text).toEqual('Something else');
     // expect(result.posts.find( i => i.id === updatedPost.id)).toEqual(updatedPost);
   });
 
   it('delete a post from the posts array', () => {
-    const oldState = { posts: [] };
-    const updatedPost: any = {
-      id: '1'
+    const postToBeDeleted: Post = {
+      id: '1',
+      createdDate: new Date(2021, 1, 5),
+      title: 'Is there life out there',
+      text: 'Something',
+      collections: [],
+      status: 'PUBLISHED'
     };
+    const oldState = { posts: [postToBeDeleted] };
 
     deepFreeze(oldState);
 
-    const actionObj = { type: types.PostActions.DELETE_POST, payload: updatedPost };
+    const actionObj = { type: types.PostActions.DELETE_POST, payload: postToBeDeleted };
 
     // Act
     const result = postsReducer(oldState, actionObj);
