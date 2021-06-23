@@ -14,21 +14,28 @@
         <h4>About</h4>
         <p>Write a header and a short text about the organisation. You can add more headers if you need to.</p>
 
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Header</mat-label>
-            <input id="input_header" matInput formControlName="header" />
-          </mat-form-field>
+        <div id="description-block" *ngFor="let descriptionBlock of descriptionBlocks">
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Header</mat-label>
+              <input id="input_header" matInput value="{{descriptionBlock.header}}"/>
+            </mat-form-field>
+          </div>
+
+          <button class="delete-description" *ngIf="descriptionBlocks.indexOf(descriptionBlock) !== 0" mat-raised-button (click)="removeDescriptionBlock()">
+            <span>Delete</span>
+          </button>
+
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Body</mat-label>
+              <textarea id="input_body" matInput value="{{descriptionBlock.body}}"></textarea>
+            </mat-form-field>
+          </div>
         </div>
 
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Body</mat-label>
-            <textarea id="input_body" matInput formControlName="body"></textarea>
-          </mat-form-field>
-        </div>
 
-        <button class="description-button" mat-raised-button>New Description Block</button>
+        <button class="description-button" mat-raised-button (click)="addDescriptionBlock()">New Description Block</button>
       </div>
 
       <div>
@@ -37,14 +44,14 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>E-mail</mat-label>
-            <input id="input_email" matInput formControlName="email"/>
+            <input id="input_email" matInput/>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Contact Person</mat-label>
-            <input id="input_contact" matInput formControlName="contact"/>
+            <input id="input_contact" matInput/>
           </mat-form-field>
         </div>
       </div>

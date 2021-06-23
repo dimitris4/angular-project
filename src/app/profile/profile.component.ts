@@ -15,6 +15,9 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService) {
   }
 
+  public profile;
+  public descriptionBlocks = [{header: 'this.profile.header', body: 'this.profile.body'}];
+
   ngOnInit(): void {
     this.authService.getLoggedInUserInfo().subscribe(res => {
       if (res) {
@@ -28,5 +31,13 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
+  }
+
+  addDescriptionBlock(): void {
+    this.descriptionBlocks.push({header: '', body: ''});
+  }
+
+  removeDescriptionBlock(): void {
+    this.descriptionBlocks.pop(); // not the last one always
   }
 }
