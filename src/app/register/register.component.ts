@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
-    console.log(this.registrationForm.value);
+    // console.log(this.registrationForm.value);
     this.userActions.signup(this.registrationForm.value);
     this.ngRedux
       .select(state => state.errors)
