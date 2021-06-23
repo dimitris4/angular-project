@@ -6,6 +6,9 @@ export class User {
     email: string;
     signupDate?: Date;
     userType?: string;
+    header?: string;
+    body?: string;
+    contact?: string;
 }
 
 

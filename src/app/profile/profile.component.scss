@@ -71,3 +71,27 @@ li {
 .delete-description {
 
 }
+
+mat-form-field {
+  .readonly {
+    cursor: not-allowed;
+  }
+}
+
+.green-button{
+  background-color: mediumseagreen;
+}
+
+.submit-button{
+  height: 50px;
+}
+
+.small-icon{
+  font-size: 15px;
+}
+
+.inside-button-container{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -15,7 +15,7 @@ import {CollectionsComponent} from './collections/components/collection-list/col
 import {NeweditcollectionComponent} from './collections/components/neweditcollection/neweditcollection.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/posts', pathMatch: 'full' },
   { path: 'signup', component: RegisterComponent },
   { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomepageComponent, canActivate: [AuthGuard],

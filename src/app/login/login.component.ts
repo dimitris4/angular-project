@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         this.serverError = res.error.message;
         if (this.authService.isLoggedIn) {
-          this.router.navigate(['home']);
+          this.router.navigate(['home/posts']);
         } else {
           return;
         }

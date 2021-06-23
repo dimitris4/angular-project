@@ -1,7 +1,6 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Post} from '../entities/Post';
-import Checkbox from '@material-ui/core/Checkbox';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 

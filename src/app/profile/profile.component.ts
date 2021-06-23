@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {User} from '../entities/User';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +13,25 @@ export class ProfileComponent implements OnInit {
   public userInfo: User;
   public hasDataLoaded = false;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder) {
   }
 
   public profile;
-  public descriptionBlocks = [{header: 'this.profile.header', body: 'this.profile.body'}];
+  // public descriptionBlocks = [{header: '', body: ''}];
+  public header;
+  public body;
+  public email;
+  public contact;
+
+  public profileForm = this.fb.group({
+    header: '',
+    body: '',
+    email: '',
+    contact: ''
+  });
+
 
   ngOnInit(): void {
     this.authService.getLoggedInUserInfo().subscribe(res => {
@@ -26,18 +41,36 @@ export class ProfileComponent implements OnInit {
           const user = value as User;
           if (user.id === userId) {
             this.userInfo = user;
+            console.log(this.userInfo);
+            localStorage.setItem('userId', key);
             this.hasDataLoaded = true;
+
+            this.profileForm = this.fb.group({
+              header: [this.userInfo.header],
+              body: [this.userInfo.body],
+              email: [this.userInfo.email],
+              contact: [this.userInfo.contact]
+            });
           }
         }
       }
     });
+
   }
 
-  addDescriptionBlock(): void {
-    this.descriptionBlocks.push({header: '', body: ''});
+  onSubmit(): void {
+    Object.assign(this.userInfo, this.profileForm.value);
+    console.log(this.profileForm.value);
+    this.authService.updateUserInfo(this.userInfo).subscribe(res => {
+      console.log(res);
+    });
   }
 
-  removeDescriptionBlock(): void {
-    this.descriptionBlocks.pop(); // not the last one always
-  }
+  // addDescriptionBlock(): void {
+  //   this.descriptionBlocks.push({header: '', body: ''});
+  // }
+  //
+  // removeDescriptionBlock(): void {
+  //   this.descriptionBlocks.pop(); // not the last one always
+  // }
 }

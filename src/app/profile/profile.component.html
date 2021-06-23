@@ -1,60 +1,66 @@
 <div class="dashboard">
-  <h2 class="title">*Username*</h2>
+  <h2 *ngIf="userInfo" class="title">{{userInfo.firstName + userInfo.lastName}}</h2>
   <div class="main-container">
     <div class="image-group">
       <div class="logo">
-<!--        Image and button-->
+        <!--        Image and button-->
       </div>
 
       <div class="cover">
-<!--        Image and button-->
+        <!--        Image and button-->
       </div>
+    </div>
 
-      <div>
-        <h4>About</h4>
-        <p>Write a header and a short text about the organisation. You can add more headers if you need to.</p>
+    <div>
+      <h4>About</h4>
+      <p>Write a header and a short text about the organisation. You can add more headers if you need to.</p>
 
-        <div id="description-block" *ngFor="let descriptionBlock of descriptionBlocks">
+      <form [formGroup]="profileForm" id="form" (ngSubmit)="onSubmit()">
+        <div id="description-block">
           <div>
             <mat-form-field appearance="fill">
               <mat-label>Header</mat-label>
-              <input id="input_header" matInput value="{{descriptionBlock.header}}"/>
+              <input id="input_header" matInput formControlName="header"/>
             </mat-form-field>
           </div>
-
-          <button class="delete-description" *ngIf="descriptionBlocks.indexOf(descriptionBlock) !== 0" mat-raised-button (click)="removeDescriptionBlock()">
-            <span>Delete</span>
-          </button>
 
           <div>
             <mat-form-field appearance="fill">
               <mat-label>Body</mat-label>
-              <textarea id="input_body" matInput value="{{descriptionBlock.body}}"></textarea>
+              <textarea id="input_body" matInput formControlName="body"></textarea>
             </mat-form-field>
           </div>
         </div>
 
-
-        <button class="description-button" mat-raised-button (click)="addDescriptionBlock()">New Description Block</button>
-      </div>
-
-      <div>
-        <h4>Contact Information</h4>
+<!--        <button class="description-button" mat-raised-button (click)="addDescriptionBlock()">New Description Block-->
+<!--        </button>-->
 
         <div>
-          <mat-form-field appearance="fill">
-            <mat-label>E-mail</mat-label>
-            <input id="input_email" matInput/>
-          </mat-form-field>
+          <h4>Contact Information</h4>
+
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>E-mail</mat-label>
+              <input class="readonly" id="input_email" matInput formControlName="email" readonly/>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Contact Person</mat-label>
+              <input id="input_contact" matInput formControlName="contact"/>
+            </mat-form-field>
+          </div>
         </div>
 
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Contact Person</mat-label>
-            <input id="input_contact" matInput/>
-          </mat-form-field>
-        </div>
-      </div>
+        <button class="submit-button green-button" mat-raised-button color="primary" id="submit_button" type="submit">
+          <div class="inside-button-container">
+            <span>Save Changes</span>
+            <span class="material-icons small-icon">library_books</span>
+          </div>
+        </button>
+      </form>
+
     </div>
   </div>
 </div>

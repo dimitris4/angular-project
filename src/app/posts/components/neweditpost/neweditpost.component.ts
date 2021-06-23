@@ -29,6 +29,7 @@ export class NeweditpostComponent implements OnInit {
   public published: boolean;
   public organisationList: User[];
   public selectedFile: File = null;
+  public downloadURL: string;
   // replace dummy data with API call in the future
   public availableCollections: Collection[];
 
@@ -44,7 +45,8 @@ export class NeweditpostComponent implements OnInit {
     private http: HttpClient,
     private dialog: MatDialog,
     private uploadTask: UploadTaskComponent
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap
@@ -113,7 +115,7 @@ export class NeweditpostComponent implements OnInit {
         likes.push(testUser);
         this.selectedPost.likes = likes;
         this.selectedPost.createdDate = new Date();
-        this.selectedPost.media = this.downloadURL;  // I need to place the url here
+        this.selectedPost.media = this.downloadURL;
         this.postActions.addPost(this.selectedPost);
         this.router.navigate(['home/posts'], {state: {postCreated: true}});
       } else {

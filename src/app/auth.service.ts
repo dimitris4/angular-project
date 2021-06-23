@@ -70,4 +70,9 @@ export class AuthService extends ApiService {
     const url = 'https://cbsstudents-b88bf-default-rtdb.firebaseio.com/users.json?auth=' + this.token;
     return this.http.get(url, this.getHttpOptions());
   }
+
+  updateUserInfo(payload): any {
+    const url = `https://cbsstudents-b88bf-default-rtdb.firebaseio.com/users/${localStorage.getItem('userId')}.json?auth=` + this.token;
+    return this.http.patch(url, payload, this.getHttpOptions());
+  }
 }

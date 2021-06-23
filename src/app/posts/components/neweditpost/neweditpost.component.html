@@ -94,42 +94,6 @@
 
       <br>
 
-<!--      &lt;!&ndash; add responsible &ndash;&gt;-->
-<!--      <div *ngIf="!editMode">-->
-<!--        <h4>Responsible</h4>-->
-<!--        <p>Assign responsibility to a volunteer to give them access to edit this content and give them notificationss-->
-<!--          when there are new comments.</p>-->
-<!--        <div class="select-container">-->
-<!--          <mat-form-field appearance="outline">-->
-<!--            <mat-label>Select volunteer or group</mat-label>-->
-<!--            <mat-select formControlName="collections" multiple>-->
-<!--              <mat-select-trigger>-->
-<!--                {{selectedPost.collections.value ? selectedPost.collections.value[0] : ''}}-->
-<!--                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">-->
-<!--                  (+{{selectedPost.collections.value.length - 1}} {{selectedPost.collections.value?.length === 2 ? 'other' : 'others'}})-->
-<!--                </span>-->
-<!--              </mat-select-trigger>-->
-<!--              <mat-option *ngFor="let collection of availableCollections" [value]="collection">{{collection.title}}</mat-option>-->
-<!--            </mat-select>-->
-<!--          </mat-form-field>-->
-
-
-<!--          &lt;!&ndash; display list of selected collections with delete button &ndash;&gt;-->
-<!--          <ul>-->
-<!--            <li *ngFor="let collection of postForm.controls['collections'].value">-->
-<!--              <div class="collections-list">-->
-<!--                <span>{{collection.title}}</span>-->
-<!--                <a style="cursor: pointer" (click)="removeCollectionOnClick(collection.id)">-->
-<!--                  <span class="material-icons">delete_forever</span>-->
-<!--                </a>-->
-<!--              </div>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <br>-->
-
       <!-- collaboration -->
       <div *ngIf="!editMode">
         <h4>Collaboration</h4>
@@ -140,12 +104,6 @@
           <mat-form-field appearance="outline">
             <mat-label>Select organisation</mat-label>
             <mat-select formControlName="collaborations" multiple>
-<!--              <mat-select-trigger>-->
-<!--                {{selectedPost.collections.length>0 ? selectedPost.collections.value[0] : ''}}-->
-<!--                <span *ngIf="selectedPost.collections.value?.length > 1" class="example-additional-selection">-->
-<!--            (+{{selectedPost.collections.value.length - 1}} {{selectedPost.collections.value?.length === 2 ? 'other' : 'others'}})-->
-<!--              </span>-->
-<!--              </mat-select-trigger>-->
               <mat-option *ngFor="let organisation of organisationList" [value]="organisation">{{organisation.firstName + ' ' + organisation.lastName}}</mat-option>
             </mat-select>
           </mat-form-field>
