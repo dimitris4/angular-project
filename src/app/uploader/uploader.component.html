@@ -4,6 +4,7 @@
   (hovered)="toggleHover($event)"
   (dropped)="onDrop($event)"
   [class.hovering]="isHovering"
+  *ngIf="files.length == 0"
 >
   <h3>Drag and Drop a File</h3>
   <p>Or Pick a File</p>
@@ -51,10 +52,10 @@
   </div>
 </div>
 
-<h3 *ngIf="files.length > 0">Uploads</h3>
+<h4 *ngIf="files.length > 0">Upload Progress</h4>
 
 <div *ngFor="let file of files">
-  <app-upload-task [file]="file"></app-upload-task>
+  <app-upload-task [file]="file" (delete)="deleteTask($event)"></app-upload-task>
 </div>
 
 

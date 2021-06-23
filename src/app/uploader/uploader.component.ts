@@ -21,6 +21,10 @@ export class UploaderComponent implements OnInit {
     }
   }
 
+  deleteTask(file): void {
+    this.files = this.files.filter(x => x !== file);
+  }
+
   constructor() { }
 
   ngOnInit(): void {
