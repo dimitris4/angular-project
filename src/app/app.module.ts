@@ -38,7 +38,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AuthService} from './auth.service';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireStorage} from '@angular/fire/storage';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -92,7 +92,7 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
         MatRippleModule, MatRadioModule,
     ],
 
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, AngularFireStorage],
+  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, AngularFireStorage, AngularFirestore, UploadTaskComponent],
 
   bootstrap: [AppComponent]
 })

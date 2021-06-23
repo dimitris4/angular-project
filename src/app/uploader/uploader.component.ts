@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-uploader',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./uploader.component.scss']
 })
 export class UploaderComponent implements OnInit {
+
+  @Output() downloadURL: EventEmitter<string> = new EventEmitter();
 
   isHovering: boolean;
 
@@ -23,6 +25,10 @@ export class UploaderComponent implements OnInit {
 
   deleteTask(file): void {
     this.files = this.files.filter(x => x !== file);
+  }
+
+  sendUrl(downloadURL): void {
+    this.downloadURL.emit(downloadURL);
   }
 
   constructor() { }

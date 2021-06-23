@@ -1,1 +1,53 @@
-<p>profile works!</p>
+<div class="dashboard">
+  <h2 class="title">*Username*</h2>
+  <div class="main-container">
+    <div class="image-group">
+      <div class="logo">
+<!--        Image and button-->
+      </div>
+
+      <div class="cover">
+<!--        Image and button-->
+      </div>
+
+      <div>
+        <h4>About</h4>
+        <p>Write a header and a short text about the organisation. You can add more headers if you need to.</p>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Header</mat-label>
+            <input id="input_header" matInput formControlName="header" />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Body</mat-label>
+            <textarea id="input_body" matInput formControlName="body"></textarea>
+          </mat-form-field>
+        </div>
+
+        <button class="description-button" mat-raised-button>New Description Block</button>
+      </div>
+
+      <div>
+        <h4>Contact Information</h4>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input id="input_email" matInput formControlName="email"/>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Contact Person</mat-label>
+            <input id="input_contact" matInput formControlName="contact"/>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

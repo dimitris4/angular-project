@@ -13,6 +13,7 @@ import {Collaboration} from '../../../entities/Collaboration';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {AlertBoxComponent} from '../../../alert-box/alert-box.component';
+import {UploadTaskComponent} from '../../../upload-task/upload-task.component';
 
 @Component({
   selector: 'app-neweditpost',
@@ -30,7 +31,8 @@ export class NeweditpostComponent implements OnInit {
     private postActions: PostActions,
     private ngRedux: NgRedux<AppState>,
     private http: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private uploadTask: UploadTaskComponent
   ) { }
 
   public selectedPost;
@@ -39,14 +41,13 @@ export class NeweditpostComponent implements OnInit {
   public editMode: boolean;
   public published: boolean;
   public organisationList: User[];
+  public downloadURL: string;
   // replace dummy data with API call in the future
   public availableCollections: Collection[] = [
     {id: '1', title: 'My favorite collection', createdDate: new Date(), status: 'DRAFT'},
     {id: '2', title: 'Events collection', createdDate: new Date(), status: 'DRAFT'},
     {id: '3', title: 'Classroom collection', createdDate: new Date(), status: 'DRAFT'},
     {id: '4', title: 'Summer collection', createdDate: new Date(), status: 'DRAFT'}];
-
-  public selectedFile: File = null;
 
   ngOnInit(): void {
     this.route.paramMap
@@ -64,6 +65,7 @@ export class NeweditpostComponent implements OnInit {
           this.editMode = true;
         }
       });
+    this.downloadURL = this.selectedPost.media;
     this.postForm = this.fb.group({
       title: [this.selectedPost.title],
       createdDate: [this.selectedPost.createdDate],
@@ -76,6 +78,7 @@ export class NeweditpostComponent implements OnInit {
     });
     // calls directly the service
     this.organisationList = this.authService.getOrganisations();
+    console.log(this.selectedPost);
   }
 
   onSubmit(): void {
@@ -109,11 +112,15 @@ export class NeweditpostComponent implements OnInit {
         likes.push(testUser);
         this.selectedPost.likes = likes;
         this.selectedPost.createdDate = new Date();
+        this.selectedPost.media = this.downloadURL;  // I need to place the url here
         this.postActions.addPost(this.selectedPost);
         this.router.navigate(['home/posts'], {state: {postCreated: true}});
       } else {
+        this.selectedPost.media = this.downloadURL;
         this.postActions.updatePost(this.selectedPost);
         this.router.navigate(['home/posts']);
+        console.log(this.downloadURL);
+        console.log(this.selectedPost.media);
       }
     }
   }
@@ -156,26 +163,13 @@ export class NeweditpostComponent implements OnInit {
     });
   }
 
-  onFileSelected(event): void {
-    console.log(event);
-    this.selectedFile = (event.target.files[0] as File);
+  assignMedia(downloadURL): void {
+    this.downloadURL = downloadURL;
   }
 
-  onUpload(): void {
-    const data = new FormData();
-    data.append('image', this.selectedFile, this.selectedFile.name);
-    // I Need the URL for this to work
-    this.http.post('URL', data, {
-      reportProgress: true,
-      observe: 'events'
-    })
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          console.log('Upload Progres: ' + Math.round(event.loaded / event.total * 100) + '%');
-        } else if (event.type === HttpEventType.Response) {
-          console.log(event);
-        }
-        console.log(event);
-      });
+  deleteFile(downloadURL): void {
+    this.uploadTask.deleteFile(this.selectedPost.media);
+    this.postActions.updatePost({...this.selectedPost, media: ''});
+    this.selectedPost.media = '';
   }
 }

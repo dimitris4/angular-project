@@ -39,7 +39,14 @@
         <h4>Add media</h4>
         <p>You can add one media type to your post. If you want to change the media type,<br>you need to delete the added media first.</p>
 
-        <app-uploader></app-uploader>
+        <app-uploader *ngIf="!selectedPost.media" (downloadURL)="assignMedia($event)"></app-uploader>
+
+        <div *ngIf="selectedPost.media">
+          <h4>Preview</h4>
+          <img class="uploaded-thumbnail" [src]="selectedPost.media" alt="media"><br>
+          <button mat-raised-button (click)="deleteFile(downloadURL)">Delete</button>
+        </div>
+
       </div>
 
       <br>

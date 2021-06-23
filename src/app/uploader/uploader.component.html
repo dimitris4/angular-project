@@ -55,7 +55,7 @@
 <h4 *ngIf="files.length > 0">Upload Progress</h4>
 
 <div *ngFor="let file of files">
-  <app-upload-task [file]="file" (delete)="deleteTask($event)"></app-upload-task>
+  <app-upload-task [file]="file" (delete)="deleteTask($event)" (mediaURL)="sendUrl($event)"></app-upload-task>
 </div>
 
 
