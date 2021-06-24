@@ -1,7 +1,7 @@
 import {browser, element, by} from 'protractor';
 
 describe('Posts section', () => {
-  const n = 3; // number of posts we want to add / delete
+  const n = 2; // number of posts we want to add / delete
 
   // Login before all tests
   beforeAll(async () => {
